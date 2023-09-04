@@ -1,0 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/24 18:52:15 by m_kamal           #+#    #+#             */
+/*   Updated: 2023/08/24 18:52:16 by m_kamal          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef MINISHELL_H
+# define MINISHELL_H
+
+# include <unistd.h>
+# include <stdio.h>
+# include <readline/readline.h>
+# include <readline/history.h>
+# include <signal.h>
+# include <sys/wait.h>
+# include <sys/types.h>
+# include <dirent.h>
+# include <fcntl.h>
+# include "../libft/includes/libft.h"
+# include "./colors.h"
+# include "./parser.h"
+
+typedef enum e_bool
+{
+	FALSE,
+	TRUE,
+}	t_bool;
+
+typedef struct s_mini
+{
+	char		**envp;
+	t_parser	*parser;
+}	t_mini;
+
+/* extern t_mini	g_mini; */
+
+t_mini		*init_minishell(char **envp);
+t_parser	*init_parser(void);
+char		*get_pwd(void);
+int			builtin_pwd(void);
+char		*create_prompt(void);
+void		open_terminal(t_mini *minishell);
+void		terminate(t_mini *minishell, char *err);
+void		exit_err(char *err);
+char		*ft_strnjoin(int argn, ...);
+void		clear(t_mini *minishell);
+void		clear_parser(t_parser *parser);
+char		**ft_arrdup(char **arr);
+void		free_arr(char **split_arr);
+
+#endif
