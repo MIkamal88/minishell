@@ -17,14 +17,18 @@ SRC	= main.c\
 			init_minishell.c\
 			init_parser.c\
 			errors.c\
-			builtin_pwd.c\
 			utils.c\
 			clear.c\
+			builtin_pwd.c\
+			lexer.c\
+			token_utils.c\
+			tokenizer.c\
 
 VPATH	:= $(SRC_PATH)\
 			$(SRC_PATH)builtins\
  			$(SRC_PATH)utils\
- 			$(SRC_PATH)lexer\
+ 			$(SRC_PATH)parsing\
+ 			$(SRC_PATH)parsing/lexical_analyzer\
  			$(SRC_PATH)system\
 
 OBJ = $(addprefix $(OBJ_PATH), $(notdir $(SRC:.c=.o)))

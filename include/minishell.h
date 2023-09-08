@@ -26,11 +26,20 @@
 # include "./colors.h"
 # include "./parser.h"
 
-typedef enum e_bool
+enum	e_mini_err
 {
-	FALSE,
-	TRUE,
-}	t_bool;
+	QUOTE = 1,
+	NDIR = 2,
+	NPERM = 3,
+	NCMD = 6,
+	DUPERR = 7,
+	FORKERR = 8,
+	PIPERR = 9,
+	PIPENDERR = 10,
+	MEM = 11,
+	IS_DIR = 12,
+	NOT_DIR = 13
+};
 
 typedef struct s_mini
 {
@@ -38,19 +47,21 @@ typedef struct s_mini
 	t_parser	*parser;
 }	t_mini;
 
-/* extern t_mini	g_mini; */
-
 t_mini		*init_minishell(char **envp);
 t_parser	*init_parser(void);
+
 char		*get_pwd(void);
 int			builtin_pwd(void);
 char		*create_prompt(void);
 void		open_terminal(t_mini *minishell);
+
 void		terminate(t_mini *minishell, char *err);
 void		exit_err(char *err);
 char		*ft_strnjoin(int argn, ...);
+
 void		clear(t_mini *minishell);
 void		clear_parser(t_parser *parser);
+
 char		**ft_arrdup(char **arr);
 void		free_arr(char **split_arr);
 

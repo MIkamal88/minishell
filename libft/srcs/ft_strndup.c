@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parser.c                                           :+:      :+:    :+:   */
+/*   ft_strndup.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/31 15:48:32 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/08/31 15:48:32 by m_kamal          ###   ########.fr       */
+/*   Created: 2023/09/06 11:17:57 by m_kamal           #+#    #+#             */
+/*   Updated: 2023/09/06 11:17:57 by m_kamal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/minishell.h"
+#include "../includes/libft.h"
 
-t_parser	*init_parser(void)
+char	*ft_strndup(const char *s1, size_t size)
 {
-	t_parser	*parser;
+	char	*ptr;
 
-	parser = malloc(sizeof(t_parser));
-	if (!parser)
+	if (!size)
 		return (NULL);
-	parser->input = NULL;
-	parser->tokens = NULL;
-	return (parser);
+	ptr = malloc((size + 1) * sizeof(char));
+	if (ptr == NULL)
+		return (NULL);
+	ft_memcpy(ptr, s1, size);
+	ptr[size] = '\0';
+	return (ptr);
 }

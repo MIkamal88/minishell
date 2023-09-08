@@ -19,11 +19,20 @@ static void	read_line(t_mini *minishell)
 	prompt = create_prompt();
 	minishell->parser = init_parser();
 	minishell->parser->input = readline(prompt);
+	if (minishell->parser->input)
+		add_history(minishell->parser->input);
 	free(prompt);
 }
 
 void	parse_line(t_mini	*minishell)
 {
+	tokenize_input(minishell->parser);
+	/* while (minishell->parser->tokens) */
+	/* { */
+	/* 	printf("%d: ", minishell->parser->tokens->lexema); */
+	/* 	printf("%s\n", minishell->parser->tokens->tkn); */
+	/* 	minishell->parser->tokens = minishell->parser->tokens->next; */
+	/* } */
 	if (ft_strcmp(minishell->parser->input, "exit") == 0)
 	{
 		clear(minishell);
