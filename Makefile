@@ -2,7 +2,7 @@ NAME	= minishell
 LIBFT	= libft.a
 
 CC	= gcc
-CF	= -Wall -Wextra -Werror -g
+CF	= -Wall -Wextra -Werror -g #-fsanitize=address
 CFI	= -I $(INCLUDE)
 CREADLINE	= -lreadline
 

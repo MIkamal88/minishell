@@ -25,31 +25,29 @@ static void	add_part(t_parser *parser, const char *input, size_t size)
 	if (!size || !(*input))
 		return ;
 	tkn = ft_strndup(input, size);
-	token = create_token(tkn);
+	token = create_token(tkn, 0);
 	token_add_back(&parser->tokens, token);
 }
 
 void	tokenize_input(t_parser *parser)
 {
-	char	*input;
-	size_t	i;
-	size_t	prev;
-	size_t	next;
-	size_t	size;
+	int		i;
+	int		prev;
+	int		next;
+	int		size;
 
-	input = parser->input;
 	i = 0;
 	prev = i;
 	next = i;
 	size = 0;
 	while (TRUE)
 	{
-		if (is_new_token(input, i, prev))
+		if (is_new_token(parser->input, i, prev))
 			next = i;
 		size = next - prev;
 		if (size > 0)
-			add_part(parser, &input[prev], size);
-		if (!input[i])
+			add_part(parser, &parser->input[prev], size);
+		if (!parser->input[i])
 			break ;
 		prev = next;
 		i++;

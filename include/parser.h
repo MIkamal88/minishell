@@ -64,7 +64,7 @@ typedef struct s_parser
 t_parser	*init_parser(void);
 void		tokenize_input(t_parser *parser);
 int			lexical_analysis(char *token);
-t_token		*create_token(char *tkn);
+t_token		*create_token(char *tkn, int flag);
 void		token_add_back(t_token **list, t_token *token);
 t_bool		is_new_token(const char *input, int index, int prev);
 

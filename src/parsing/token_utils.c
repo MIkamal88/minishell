@@ -12,15 +12,18 @@
 
 #include "../../include/minishell.h"
 
-t_token	*create_token(char *tkn)
+t_token	*create_token(char *tkn, int flag)
 {
 	t_token	*token;
 
 	token = malloc(sizeof(t_token));
 	if (!token)
-		perror("Error parsing token\n");
+		return (NULL);
 	token->tkn = tkn;
-	token->lexema = lexical_analysis(tkn);
+	if (!flag)
+		token->lexema = lexical_analysis(tkn);
+	else
+		token->lexema = WORD;
 	token->next = NULL;
 	return (token);
 }

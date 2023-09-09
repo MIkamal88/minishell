@@ -31,7 +31,7 @@ enum	e_mini_err
 	QUOTE = 1,
 	NDIR = 2,
 	NPERM = 3,
-	NCMD = 6,
+	TKN_ERR = 4,
 	DUPERR = 7,
 	FORKERR = 8,
 	SYNT_ERR = 9,
