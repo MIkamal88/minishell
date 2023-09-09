@@ -6,7 +6,7 @@ CF	= -Wall -Wextra -Werror -g
 CFI	= -I $(INCLUDE)
 CREADLINE	= -lreadline
 
-LIBFT_PATH	= ./libft/srcs/
+LIBFT_PATH	= ./libft/
 SRC_PATH		= ./src/
 OBJ_PATH		= ./build/
 INCLUDE			= ./include/
