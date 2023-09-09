@@ -12,6 +12,8 @@
 
 #include "../include/minishell.h"
 
+t_global	g_glob;
+
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	*minishell;

@@ -24,20 +24,17 @@ static void	read_line(t_mini *minishell)
 	free(prompt);
 }
 
-void	parse_line(t_mini	*minishell)
+static t_bool	parse_line(t_mini	*minishell)
 {
 	tokenize_input(minishell->parser);
-	while (minishell->parser->tokens)
-	{
-		printf("%d: ", minishell->parser->tokens->lexema);
-		printf("%s\n", minishell->parser->tokens->tkn);
-		minishell->parser->tokens = minishell->parser->tokens->next;
-	}
+	if (!syntax_analysis(minishell->parser))
+		return (FALSE);
 	if (ft_strcmp(minishell->parser->input, "exit") == 0)
 	{
 		clear(minishell);
 		exit(0);
 	}
+	return (TRUE);
 }
 
 void	open_terminal(t_mini *minishell)
@@ -47,7 +44,8 @@ void	open_terminal(t_mini *minishell)
 		// Signals;
 		clear_parser(minishell->parser);
 		read_line(minishell);
-		parse_line(minishell);
+		if (!parse_line(minishell))
+			continue ;
 		// exec_line;
 	}
 }

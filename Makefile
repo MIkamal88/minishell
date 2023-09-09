@@ -23,12 +23,15 @@ SRC	= main.c\
 			lexer.c\
 			token_utils.c\
 			tokenizer.c\
+			syntax_analysis.c\
+			syntax_checks.c\
 
 VPATH	:= $(SRC_PATH)\
 			$(SRC_PATH)builtins\
  			$(SRC_PATH)utils\
  			$(SRC_PATH)parsing\
  			$(SRC_PATH)parsing/lexical_analyzer\
+ 			$(SRC_PATH)parsing/syntax\
  			$(SRC_PATH)system\
 
 OBJ = $(addprefix $(OBJ_PATH), $(notdir $(SRC:.c=.o)))

@@ -18,10 +18,10 @@ t_mini	*init_minishell(char **envp)
 
 	minishell = malloc(sizeof(t_mini));
 	if (!minishell)
-		terminate(minishell, "Error initializing Minishell");
+		terminate(minishell);
 	minishell->envp = ft_arrdup(envp);
 	minishell->parser = init_parser();
 	if (!minishell->parser)
-		terminate(minishell, "Error initializing Parser");
+		terminate(minishell);
 	return (minishell);
 }

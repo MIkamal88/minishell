@@ -34,11 +34,12 @@ enum	e_mini_err
 	NCMD = 6,
 	DUPERR = 7,
 	FORKERR = 8,
-	PIPERR = 9,
-	PIPENDERR = 10,
+	SYNT_ERR = 9,
+	SYNT_ERR_2 = 10,
 	MEM = 11,
 	IS_DIR = 12,
-	NOT_DIR = 13
+	NOT_DIR = 13,
+	ARGS = 14
 };
 
 typedef struct s_mini
@@ -46,6 +47,13 @@ typedef struct s_mini
 	char		**envp;
 	t_parser	*parser;
 }	t_mini;
+
+typedef struct s_global
+{
+	int	exit_code;
+}	t_global;
+
+extern t_global	g_glob;
 
 t_mini		*init_minishell(char **envp);
 t_parser	*init_parser(void);
@@ -55,7 +63,8 @@ int			builtin_pwd(void);
 char		*create_prompt(void);
 void		open_terminal(t_mini *minishell);
 
-void		terminate(t_mini *minishell, char *err);
+void		ft_error(char *s, int err, int code);
+void		terminate(t_mini *minishell);
 void		exit_err(char *err);
 char		*ft_strnjoin(int argn, ...);
 

@@ -12,15 +12,27 @@
 
 #include "../../include/minishell.h"
 
-void	terminate(t_mini *minishell, char *err)
+void	terminate(t_mini *minishell)
 {
 	clear(minishell);
-	printf("%s", err);
-	exit(1);
+	exit(g_glob.exit_code);
 }
 
 void	exit_err(char *err)
 {
 	printf("%s", err);
 	exit(1);
+}
+
+void	syntax_error(char *s, int err)
+{
+	if (err == SYNT_ERR)
+		write(2, &s, ft_strlen(s));
+}
+
+void	ft_error(char *s, int err, int code)
+{
+	g_glob.exit_code = code;
+	if (err == SYNT_ERR || err == SYNT_ERR_2)
+		syntax_error(s, err);
 }
