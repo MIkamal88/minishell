@@ -28,6 +28,28 @@ void	clear_tokens(t_token **tokens)
 	*tokens = NULL ;
 }
 
+void	clear_cmd(t_cmd *cmd)
+{
+	t_cmd	*curr;
+	t_cmd	*tmp;
+
+	curr = cmd;
+	while (curr)
+	{
+		tmp = curr;
+		curr = curr->next;
+		clear_tokens(&tmp->commands);
+		clear_tokens(&tmp->redirects);
+		free_arr(tmp->exec);
+		if (tmp->envp)
+			free_arr(tmp->envp);
+		if (tmp->exec_path)
+			free(tmp->exec_path);
+		free(tmp);
+	}
+	cmd = NULL;
+}
+
 void	clear_parser(t_parser *parser)
 {
 	if (!parser)
@@ -46,6 +68,8 @@ void	clear(t_mini *minishell)
 		free_arr(minishell->envp);
 	if (minishell->parser)
 		clear_parser(minishell->parser);
+	if (minishell->cmd)
+		clear_cmd(minishell->cmd);
 	free(minishell);
 	rl_clear_history();
 }

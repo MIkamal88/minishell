@@ -29,6 +29,7 @@ static t_bool	parse_line(t_mini	*minishell)
 	tokenize_input(minishell->parser);
 	if (!syntax_analysis(minishell->parser))
 		return (FALSE);
+	cmd_table(minishell);
 	if (ft_strcmp(minishell->parser->input, "exit") == 0)
 		terminate(minishell);
 	return (TRUE);

@@ -12,18 +12,15 @@
 
 #include "../../include/minishell.h"
 
-t_token	*create_token(char *tkn, int flag)
+t_token	*tkn_dup(t_token *original)
 {
 	t_token	*token;
 
 	token = malloc(sizeof(t_token));
 	if (!token)
 		return (NULL);
-	token->tkn = tkn;
-	if (!flag)
-		token->lexema = lexical_analysis(tkn);
-	else
-		token->lexema = WORD;
+	token->tkn = ft_strdup(original->tkn);
+	token->lexema = original->lexema;
 	token->next = NULL;
 	return (token);
 }

@@ -2,7 +2,7 @@ NAME	= minishell
 LIBFT	= libft.a
 
 CC	= gcc
-CF	= -Wall -Wextra -Werror -g #-fsanitize=address
+CF	= -g -Wall -Wextra -Werror #-fsanitize=address
 CFI	= -I $(INCLUDE)
 CREADLINE	= -lreadline
 
@@ -25,6 +25,8 @@ SRC	= main.c\
 			tokenizer.c\
 			syntax_analysis.c\
 			syntax_checks.c\
+			cmd_table.c\
+			cmd_utils.c\
 
 VPATH	:= $(SRC_PATH)\
 			$(SRC_PATH)builtins\
@@ -32,6 +34,7 @@ VPATH	:= $(SRC_PATH)\
  			$(SRC_PATH)parsing\
  			$(SRC_PATH)parsing/lexical_analyzer\
  			$(SRC_PATH)parsing/syntax\
+ 			$(SRC_PATH)parsing/cmd_table\
  			$(SRC_PATH)system\
 
 OBJ = $(addprefix $(OBJ_PATH), $(notdir $(SRC:.c=.o)))

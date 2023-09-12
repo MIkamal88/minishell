@@ -55,8 +55,6 @@ static int	check_token(char *token)
 			return (GREAT);
 		if (token[0] == '<')
 			return (LESS);
-		if (token[0] == '(' || token[0] == ')')
-			return (PARANTHESIS);
 	}
 	if (ft_strlen(token) == 2)
 	{

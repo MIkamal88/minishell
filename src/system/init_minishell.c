@@ -21,6 +21,7 @@ t_mini	*init_minishell(char **envp)
 		terminate(minishell);
 	minishell->envp = ft_arrdup(envp);
 	minishell->parser = init_parser();
+	minishell->cmd = NULL;
 	if (!minishell->parser)
 		terminate(minishell);
 	return (minishell);

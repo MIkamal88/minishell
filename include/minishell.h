@@ -45,6 +45,7 @@ enum	e_mini_err
 typedef struct s_mini
 {
 	char		**envp;
+	t_cmd		*cmd;
 	t_parser	*parser;
 }	t_mini;
 
@@ -63,15 +64,21 @@ int			builtin_pwd(void);
 char		*create_prompt(void);
 void		open_terminal(t_mini *minishell);
 
+void		tokenize_input(t_parser *parser);
+int			lexical_analysis(char *token);
+void		cmd_table(t_mini *minishell);
+t_cmd		*cmd_create(int id);
+void		cmd_add_back(t_mini *minishell, t_cmd *node);
+
 void		ft_error(char *s, int err, int code);
 void		terminate(t_mini *minishell);
 void		exit_err(char *err);
-char		*ft_strnjoin(int argn, ...);
-
 void		clear(t_mini *minishell);
 void		clear_parser(t_parser *parser);
+void		clear_cmd(t_cmd *cmd);
 
 char		**ft_arrdup(char **arr);
+char		*ft_strnjoin(int argn, ...);
 void		free_arr(char **split_arr);
 
 #endif
