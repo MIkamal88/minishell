@@ -12,14 +12,14 @@
 
 #include "../../../include/minishell.h"
 
-/*	COMMAND_TABLE
+/*	CMD_TABLE
 **	-------------
 **	DESCRIPTION
 **	The command_table function will assemble the t_token list into two different 
 **	commands and redirect list, using the operators as endpoints to simple
 **	commands (ordered into a t_cmd list).
 **	PARAMETERS
-**	-
+**	#1. Minishell struct
 **	RETURN VALUES
 **	- 
 */

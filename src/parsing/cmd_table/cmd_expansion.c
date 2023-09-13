@@ -15,13 +15,14 @@
 /*	COMMAND_EXPANSION
 **	-----------------
 **	DESCRIPTION
-**	This function will alterate the t_tkn list nodes in place according to
+**	This function will alternate the t_token list nodes in place according to
 **	specific expansion rules of shell's grammar. The expansion rules include:
-**	tilde expansion according to the HOME environment variable, variable
-**	expansion according to the environment and local variables (prompted by '$')
-**	and quotation expansion, both happening upon start and closing marks.
+**	#1. Tilde expansion according to the HOME environment variable
+**	#2. Variable expansion according to the environment and local variables
+**	(prompted by '$')
+**	#3. Quotation expansion both happening upon start and closing marks.
 **	PARAMETERS
-**	-
+**	#1. cmd struct
 **	RETURN VALUES
 **	-
 */

@@ -12,6 +12,18 @@
 
 #include "../../include/minishell.h"
 
+/*	TOKENIZE_INPUT
+**	---------
+**	DESCRIPTION
+**	The tokenizer function will split the original input line into "tokens"
+**	(meaninfull words), the first step to properly "understand" what the user
+**	is trying to accomplish with the command. 
+**	PARAMETERS
+**	#1. Parser struct.
+**	RETURN VALUES
+**	-
+*/
+
 t_token	*create_token(char *tkn, int flag)
 {
 	t_token	*token;
