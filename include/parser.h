@@ -67,6 +67,11 @@ void		token_add_back(t_token **list, t_token *token);
 t_bool		is_new_token(const char *input, int index, int prev);
 t_token		*tkn_dup(t_token *original);
 
+void		cmd_expansion(t_cmd *cmd);
+void		tilde_expansion(t_token **token, int *pos);
+void		quote_expansion(t_token **tkn, int *pos, char quote);
+void		variable_expansion(t_token **tkn, int *pos);
+
 t_bool		syntax_analysis(t_parser *parser);
 t_bool		syntax_pipe(t_token *token, int pos);
 t_bool		syntax_redirect_io(t_token *token);

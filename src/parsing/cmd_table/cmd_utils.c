@@ -47,3 +47,9 @@ void	cmd_add_back(t_mini *minishell, t_cmd *node)
 		cmd_list->next = node;
 	}
 }
+
+void	swap_token(t_token *token, char	*new_token)
+{
+	free(token->tkn);
+	token->tkn = new_token;
+}

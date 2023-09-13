@@ -12,6 +12,18 @@
 
 #include "../../../include/minishell.h"
 
+/*	COMMAND_TABLE
+**	-------------
+**	DESCRIPTION
+**	The command_table function will assemble the t_token list into two different 
+**	commands and redirect list, using the operators as endpoints to simple
+**	commands (ordered into a t_cmd list).
+**	PARAMETERS
+**	-
+**	RETURN VALUES
+**	- 
+*/
+
 static int	is_redirect(int prev, int curr)
 {
 	if (curr >= LESS && curr <= DGREAT)

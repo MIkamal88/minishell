@@ -69,6 +69,7 @@ int			lexical_analysis(char *token);
 void		cmd_table(t_mini *minishell);
 t_cmd		*cmd_create(int id);
 void		cmd_add_back(t_mini *minishell, t_cmd *node);
+void		swap_token(t_token *token, char	*new_token);
 
 void		ft_error(char *s, int err, int code);
 void		terminate(t_mini *minishell);
