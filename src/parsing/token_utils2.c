@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_expansion.c                                  :+:      :+:    :+:   */
+/*   token_utils2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 07:11:49 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/09/13 07:11:49 by m_kamal          ###   ########.fr       */
+/*   Created: 2023/09/26 11:56:23 by m_kamal           #+#    #+#             */
+/*   Updated: 2023/09/26 11:56:23 by m_kamal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "../../include/minishell.h"
 
-/*	QUOTE_EXPANSION
-**	---------------
-**	DESCRIPTION
-**	It expands the token in which there are quotation marks (either "" or
-*''), *	as well as any possible variables ($VAR) within "". *	PARAMETERS
-**	#1. The token to expand.
-**	RETURN VALUES
-**	The expanded string, if appliable. NULL if no quotation was found.
-*/
+int	tkn_len(t_token *token)
+{
+	int	len;
+
+	len = 0;
+	while (token)
+	{
+		len++;
+		token = token->next;
+	}
+	return (len);
+}

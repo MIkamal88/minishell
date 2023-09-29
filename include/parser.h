@@ -49,6 +49,9 @@ typedef struct s_cmd
 	char			**envp;
 	int				fd_in;
 	int				fd_out;
+	int				fd_pipe[2];
+	int				errnb;
+	char			*errfile;
 	struct s_cmd	*next;
 }	t_cmd;
 
@@ -66,10 +69,11 @@ t_token		*create_token(char *tkn, int flag);
 void		token_add_back(t_token **list, t_token *token);
 t_bool		is_new_token(const char *input, int index, int prev);
 t_token		*tkn_dup(t_token *original);
+int			tkn_len(t_token *token);
 
 void		cmd_expansion(t_cmd *cmd);
 void		tilde_expansion(t_token **token, int *pos);
-void		quote_expansion(t_token **tkn, int *pos, char quote);
+void		quote_expansion(t_token **token, int *pos, char quote);
 void		variable_expansion(t_token **tkn, int *pos);
 
 t_bool		syntax_analysis(t_parser *parser);

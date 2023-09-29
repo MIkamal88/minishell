@@ -18,7 +18,7 @@ t_cmd	*cmd_create(int id)
 
 	cmd = malloc(sizeof(t_cmd));
 	if (!cmd)
-		return (NULL);
+		ft_error(NULL, ALLOC, 11);
 	cmd->id = id;
 	cmd->commands = NULL;
 	cmd->redirects = NULL;
@@ -29,6 +29,8 @@ t_cmd	*cmd_create(int id)
 	cmd->envp = NULL;
 	cmd->fd_in = -2;
 	cmd->fd_out = -2;
+	cmd->errnb = 0;
+	cmd->errfile = NULL;
 	cmd->next = NULL;
 	return (cmd);
 }

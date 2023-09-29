@@ -42,8 +42,10 @@ void	open_terminal(t_mini *minishell)
 		// Signals;
 		clear_parser(minishell->parser);
 		read_line(minishell);
+		if (g_glob.exit_code == 11)
+			terminate(minishell);
 		if (!parse_line(minishell))
 			continue ;
-		// exec_line;
+		exec_line(minishell);
 	}
 }

@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   quote_expansion.c                                  :+:      :+:    :+:   */
+/*   exec_commands.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/13 07:11:49 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/09/13 07:11:49 by m_kamal          ###   ########.fr       */
+/*   Created: 2023/09/26 12:44:52 by m_kamal           #+#    #+#             */
+/*   Updated: 2023/09/26 12:44:52 by m_kamal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../../include/minishell.h"
+#include "../../include/minishell.h"
 
-/*	QUOTE_EXPANSION
-**	---------------
-**	DESCRIPTION
-**	It expands the token in which there are quotation marks (either "" or
-*''), *	as well as any possible variables ($VAR) within "". *	PARAMETERS
-**	#1. The token to expand.
-**	RETURN VALUES
-**	The expanded string, if appliable. NULL if no quotation was found.
-*/
+void	exec_commands(t_mini *minishell)
+{
+	t_cmd	*cmd;
+
+	cmd = minishell->cmd;
+	while (cmd)
+	{
+		exec_pipe_block(&cmd);
+		cmd = cmd->next;
+	}
+}

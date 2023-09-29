@@ -15,18 +15,21 @@ SRC	= main.c\
 			prompt.c\
 			open_terminal.c\
 			init_minishell.c\
-			init_parser.c\
 			errors.c\
 			utils.c\
 			clear.c\
 			builtin_pwd.c\
 			lexer.c\
 			token_utils.c\
+			token_utils2.c\
 			tokenizer.c\
 			syntax_analysis.c\
 			syntax_checks.c\
 			cmd_table.c\
 			cmd_utils.c\
+			cmd_list.c\
+			exec_line.c\
+			open_pipes.c\
 
 VPATH	:= $(SRC_PATH)\
 			$(SRC_PATH)builtins\
@@ -36,6 +39,7 @@ VPATH	:= $(SRC_PATH)\
  			$(SRC_PATH)parsing/syntax\
  			$(SRC_PATH)parsing/cmd_table\
  			$(SRC_PATH)system\
+ 			$(SRC_PATH)execute\
 
 OBJ = $(addprefix $(OBJ_PATH), $(notdir $(SRC:.c=.o)))
 
@@ -57,7 +61,7 @@ $(NAME):	ANNOUNCE $(OBJ)
 all:	$(NAME)
 
 ANNOUNCE:
-	@printf "$(YE)Generating .o Files...$(RC)\n"
+	@printf "$(YE)Generating Object Files...$(RC)\n"
 
 re:		fclean all
 

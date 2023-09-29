@@ -26,3 +26,15 @@ t_mini	*init_minishell(char **envp)
 		terminate(minishell);
 	return (minishell);
 }
+
+t_parser	*init_parser(void)
+{
+	t_parser	*parser;
+
+	parser = malloc(sizeof(t_parser));
+	if (!parser)
+		ft_error(NULL, ALLOC, 11);
+	parser->input = NULL;
+	parser->tokens = NULL;
+	return (parser);
+}

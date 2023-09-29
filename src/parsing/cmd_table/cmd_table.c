@@ -71,4 +71,6 @@ void	cmd_table(t_mini *minishell)
 		cmd_add_back(minishell, cmd_node);
 		id++;
 	}
+	// cmd_expansion;
+	cmd_list(minishell);
 }

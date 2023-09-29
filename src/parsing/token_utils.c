@@ -18,7 +18,7 @@ t_token	*tkn_dup(t_token *original)
 
 	token = malloc(sizeof(t_token));
 	if (!token)
-		return (NULL);
+		ft_error(NULL, ALLOC, 11);
 	token->tkn = ft_strdup(original->tkn);
 	token->lexema = original->lexema;
 	token->next = NULL;

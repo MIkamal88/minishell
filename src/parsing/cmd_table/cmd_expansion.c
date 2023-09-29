@@ -24,7 +24,7 @@
 **	PARAMETERS
 **	#1. cmd struct
 **	RETURN VALUES
-**	-
+**	
 */
 
 static void	token_expansion(t_token **token)

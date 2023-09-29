@@ -30,7 +30,7 @@ t_token	*create_token(char *tkn, int flag)
 
 	token = malloc(sizeof(t_token));
 	if (!token)
-		return (NULL);
+		ft_error(NULL, ALLOC, 11);
 	token->tkn = tkn;
 	if (!flag)
 		token->lexema = lexical_analysis(tkn);

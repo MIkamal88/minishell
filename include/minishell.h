@@ -22,6 +22,7 @@
 # include <sys/types.h>
 # include <dirent.h>
 # include <fcntl.h>
+# include <errno.h>
 # include "../libft/includes/libft.h"
 # include "./colors.h"
 # include "./parser.h"
@@ -36,7 +37,7 @@ enum	e_mini_err
 	FORKERR = 8,
 	SYNT_ERR = 9,
 	SYNT_ERR_2 = 10,
-	MEM = 11,
+	ALLOC = 11,
 	IS_DIR = 12,
 	NOT_DIR = 13,
 	ARGS = 14
@@ -67,6 +68,9 @@ void		open_terminal(t_mini *minishell);
 void		tokenize_input(t_parser *parser);
 int			lexical_analysis(char *token);
 void		cmd_table(t_mini *minishell);
+void		cmd_list(t_mini *minishell);
+void		exec_line(t_mini *minishell);
+void		open_pipes(t_mini *minishell);
 t_cmd		*cmd_create(int id);
 void		cmd_add_back(t_mini *minishell, t_cmd *node);
 void		swap_token(t_token *token, char	*new_token);
