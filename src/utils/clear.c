@@ -40,7 +40,8 @@ void	clear_cmd(t_cmd *cmd)
 		curr = curr->next;
 		clear_tokens(&tmp->commands);
 		clear_tokens(&tmp->redirects);
-		free_arr(tmp->exec);
+		if (tmp->exec)
+			free_arr(tmp->exec);
 		if (tmp->envp)
 			free_arr(tmp->envp);
 		if (tmp->exec_path)
@@ -70,6 +71,6 @@ void	clear(t_mini *minishell)
 		clear_parser(minishell->parser);
 	if (minishell->cmd)
 		clear_cmd(minishell->cmd);
-	free(minishell);
 	rl_clear_history();
+	free(minishell);
 }

@@ -26,21 +26,23 @@
 # include "../libft/includes/libft.h"
 # include "./colors.h"
 # include "./parser.h"
+# include "./execute.h"
 
 enum	e_mini_err
 {
 	QUOTE = 1,
 	NDIR = 2,
-	NPERM = 3,
+	SIG = 3,
 	TKN_ERR = 4,
 	DUPERR = 7,
 	FORKERR = 8,
 	SYNT_ERR = 9,
 	SYNT_ERR_2 = 10,
 	ALLOC = 11,
-	IS_DIR = 12,
-	NOT_DIR = 13,
-	ARGS = 14
+	CMD_P = 12,
+	CMD_NA = 13,
+	NOT_DIR = 14,
+	ARGS = 15
 };
 
 typedef struct s_mini
@@ -65,19 +67,16 @@ int			builtin_pwd(void);
 char		*create_prompt(void);
 void		open_terminal(t_mini *minishell);
 
-void		tokenize_input(t_parser *parser);
-int			lexical_analysis(char *token);
 void		cmd_table(t_mini *minishell);
 void		cmd_list(t_mini *minishell);
+
 void		exec_line(t_mini *minishell);
 void		open_pipes(t_mini *minishell);
-t_cmd		*cmd_create(int id);
-void		cmd_add_back(t_mini *minishell, t_cmd *node);
-void		swap_token(t_token *token, char	*new_token);
+t_bool		define_redirects(t_mini *minishell);
 
 void		ft_error(char *s, int err, int code);
 void		terminate(t_mini *minishell);
-void		exit_err(char *err);
+void		exit_err(char *err, int errnb);
 void		clear(t_mini *minishell);
 void		clear_parser(t_parser *parser);
 void		clear_cmd(t_cmd *cmd);

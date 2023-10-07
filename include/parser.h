@@ -66,12 +66,17 @@ typedef struct s_parser
 
 t_parser	*init_parser(void);
 t_token		*create_token(char *tkn, int flag);
+void		tokenize_input(t_parser *parser);
+int			lexical_analysis(char *token);
 void		token_add_back(t_token **list, t_token *token);
 t_bool		is_new_token(const char *input, int index, int prev);
 t_token		*tkn_dup(t_token *original);
 int			tkn_len(t_token *token);
 
+t_cmd		*cmd_create(char **envp, int id);
 void		cmd_expansion(t_cmd *cmd);
+void		cmd_add_back(t_cmd *cmd, t_cmd *node);
+void		swap_token(t_token *token, char	*new_token);
 void		tilde_expansion(t_token **token, int *pos);
 void		quote_expansion(t_token **token, int *pos, char quote);
 void		variable_expansion(t_token **tkn, int *pos);

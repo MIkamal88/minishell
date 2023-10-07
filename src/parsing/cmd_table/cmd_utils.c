@@ -12,7 +12,7 @@
 
 #include "../../../include/minishell.h"
 
-t_cmd	*cmd_create(int id)
+t_cmd	*cmd_create(char **envp, int id)
 {
 	t_cmd	*cmd;
 
@@ -26,7 +26,7 @@ t_cmd	*cmd_create(int id)
 	cmd->is_piped = FALSE;
 	cmd->exec = NULL;
 	cmd->exec_path = NULL;
-	cmd->envp = NULL;
+	cmd->envp = envp;
 	cmd->fd_in = -2;
 	cmd->fd_out = -2;
 	cmd->errnb = 0;
@@ -35,13 +35,13 @@ t_cmd	*cmd_create(int id)
 	return (cmd);
 }
 
-void	cmd_add_back(t_mini *minishell, t_cmd *node)
+void	cmd_add_back(t_cmd *cmd, t_cmd *node)
 {
 	t_cmd	*cmd_list;
 
-	cmd_list = minishell->cmd;
+	cmd_list = cmd;
 	if (!cmd_list)
-		minishell->cmd = node;
+		cmd = node;
 	else
 	{
 		while (cmd_list->next)
