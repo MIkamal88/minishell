@@ -35,7 +35,6 @@ VPATH	:= $(SRC_PATH)\
 			$(SRC_PATH)builtins\
  			$(SRC_PATH)utils\
  			$(SRC_PATH)parsing\
- 			$(SRC_PATH)parsing/lexical_analyzer\
  			$(SRC_PATH)parsing/syntax\
  			$(SRC_PATH)parsing/cmd_table\
  			$(SRC_PATH)system\
