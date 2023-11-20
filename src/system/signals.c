@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_cmd_sigs.c                                    :+:      :+:    :+:   */
+/*   signals.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/30 07:20:42 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/09/30 07:20:42 by m_kamal          ###   ########.fr       */
+/*   Created: 2023/11/07 17:46:13 by m_kamal           #+#    #+#             */
+/*   Updated: 2023/11/07 17:46:13 by m_kamal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-/*	EXEC_COMMANDS_SIGNALS
-**	---------------------
+/*	CHANGE_INPUT_SIGNALS
+**	--------------------
 **	DESCRIPTION
 **	It changes the default signals received by specific shortcuts when executing
-**	the exec_commands function, to avoid that these signals will respond to the
+**	the main minishell function, to avoid that these signals will respond to the
 **	parent shell, instead of the current. 
 **	PARAMETERS
 **	-
@@ -24,34 +24,17 @@
 **	-
 */
 
-static void	quit_process(int signal)
+static void	reprompt(int signal)
 {
 	(void)signal;
-	ft_error(NULL, 3, 310);
+	printf("\n");
+	rl_replace_line("", 0);
+	rl_on_new_line();
+	rl_redisplay();
 }
 
-static void	interrupt_process(int signal)
+void	run_signals(void)
 {
-	(void)signal;
-	ft_error(NULL, 3, 300);
-}
-
-void	exec_commands_child_signals(void)
-{
-	signal(SIGINT, interrupt_process);
-	signal(SIGQUIT, quit_process);
-}
-
-static void	parent_sig(int signal)
-{
-	if (signal == SIGQUIT)
-		ft_error(NULL, 3, 310);
-	if (signal == SIGINT)
-		ft_error(NULL, 3, 300);
-}
-
-void	exec_commands_parent_signals(void)
-{
-	signal(SIGQUIT, parent_sig);
-	signal(SIGINT, parent_sig);
+	signal(SIGINT, reprompt);
+	signal(SIGQUIT, SIG_IGN);
 }

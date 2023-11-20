@@ -11,60 +11,96 @@
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <asm-generic/errno-base.h>
-#include <unistd.h>
 
-void	terminate(t_mini *minishell)
+static void	cd_err(char *str, int err)
 {
-	clear(minishell);
-	exit(g_glob.exit_code);
-}
-
-void	exit_err(char *errfile, int errnb)
-{
-	if (errnb == EACCES)
-		ft_error(errfile, CMD_P, 12);
-	if (errnb == ENOENT)
-		ft_error(errfile, NOT_DIR, 14);
-	else
-		ft_error(errfile, CMD_NA, 13);
-}
-
-void	syntax_error(char *s, int err)
-{
-	if (err == SYNT_ERR)
-		write(2, &s, ft_strlen(s));
-}
-
-void	cmd_error(char *s, int err)
-{
-	char	*str;
-
-	if (err == CMD_P)
+	if (err == 11)
 	{
-		str = " Permission Denied\n";
-		write(2, &s, ft_strlen(s));
-		write(2, &str, ft_strlen(str));
+		write_err("Minishell: cd: ");
+		write_err(str);
+		write_err(" not set\n");
 	}
-	if (err == CMD_NA)
+	if (err == 12)
 	{
-		str = " Command not found\n";
-		write(2, &s, ft_strlen(s));
-		write(2, &str, ft_strlen(s));
-	}
-	if (err == NOT_DIR)
-	{
-		str = " No Such file or directory\n";
-		write(2, &s, ft_strlen(s));
-		write(2, &str, ft_strlen(str));
+		write_err("Minishell: cd: ");
+		write_err(str);
+		write_err(": No such file or directory\n");
 	}
 }
 
-void	ft_error(char *s, int err, int code)
+static void	exec_err(char *str, int err)
 {
-	g_glob.exit_code = code;
-	if (err == SYNT_ERR || err == SYNT_ERR_2)
-		syntax_error(s, err);
-	if (err == CMD_P || err == CMD_NA || err == NOT_DIR)
-		cmd_error(s, err);
+	if (err == 14)
+	{
+		write_err("Minishell: ");
+		write_err(str);
+		write_err(": Too many arguments");
+	}
+	if (err == 15)
+	{
+		write_err(str);
+		write_err(": Command not found\n");
+	}
+	if (err == 16)
+	{
+		write_err("Minishell: export: ");
+		write_err(str);
+		write_err(": not a valid identifier\n");
+	}
+}
+
+static void	syntax_err(char *str, int err)
+{
+	if (err == 21)
+	{
+		write_err("Minishell: Syntax error near unexpected token ");
+		write_err(str);
+		write_err("\n");
+	}
+	if (err == 22)
+		write_err("Minishell: Quote missing\n");
+}
+
+static void	redirect_err(char *str, int err)
+{
+	if (err == 31)
+	{
+		write_err("Minishell: ");
+		write_err(str);
+		write_err(": Permission denied");
+	}
+	if (err == 32)
+	{
+		write_err("Minishell: ");
+		write_err(str);
+		write_err(": No such file or directory\n");
+	}
+	if (err == 33)
+	{
+		write_err("Minishell: warning: here-document delimited by \
+			end-of-file (wanted `");
+		write_err(str);
+		write_err("')\n");
+	}
+	if (err == 34)
+		write_err("Quit\n");
+	if (err == 35)
+		write_err("\n");
+}
+
+void	ft_error(char *str, int err, int code)
+{
+	g_exit_code = code;
+	if (err > 0 && err < 10)
+		write_err(str);
+	if (err >= 0 && err < 10)
+		exit(0);
+	if (err >= 11 && err <= 12)
+		cd_err(str, err);
+	if (err >= 14 && err <= 16)
+		exec_err(str, err);
+	if (err >= 20 && err < 30)
+		syntax_err(str, err);
+	if (err >= 30 && err < 40)
+		redirect_err(str, err);
 }

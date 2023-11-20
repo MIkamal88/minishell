@@ -1,34 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   close_fds.c                                        :+:      :+:    :+:   */
+/*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/02 06:46:13 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/10/02 06:46:13 by m_kamal          ###   ########.fr       */
+/*   Created: 2023/11/08 15:28:01 by m_kamal           #+#    #+#             */
+/*   Updated: 2023/11/08 15:28:01 by m_kamal          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
-#include <unistd.h>
 
-void	close_fds(t_cmd *comm)
+/*	FT_ECHO
+**	-------
+**	DESCRIPTION
+**	Prints the parameter into the directory.
+**	PARAMETERS
+**	#1. The complete exec list of parameters.
+**	RETURN VALUES
+**	0 for sucess, 1 for error.
+*/
+
+int	ft_echo(char **exec)
 {
-	t_cmd	*cmd;
+	char	*flag;
+	int		i;
 
-	cmd = comm;
-	while (cmd)
+	flag = NULL;
+	i = 1;
+	if (exec[i] && *exec[i] == '-')
+		flag = &exec[i++][1];
+	while (exec[i])
 	{
-		close_fd(cmd, BOTH);
-		cmd = cmd->next;
+		printf("%s", exec[i++]);
+		if (exec[i])
+			printf(" ");
 	}
-}
-
-void	close_fd(t_cmd *cmd, int fd_flag)
-{
-	if ((fd_flag == IN || fd_flag == BOTH) && cmd->fd_in > 2)
-		close(cmd->fd_in);
-	if ((fd_flag == OUT || fd_flag == BOTH) && cmd->fd_out > 2)
-		close(cmd->fd_out);
+	if (ft_strncmp(flag, "n\0", 2))
+		printf("\n");
+	return (0);
 }

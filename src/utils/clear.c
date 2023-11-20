@@ -28,12 +28,12 @@ void	clear_tokens(t_token **tokens)
 	*tokens = NULL ;
 }
 
-void	clear_cmd(t_cmd *cmd)
+void	clear_cmd(t_mini *minishell)
 {
 	t_cmd	*curr;
 	t_cmd	*tmp;
 
-	curr = cmd;
+	curr = minishell->cmd;
 	while (curr)
 	{
 		tmp = curr;
@@ -41,36 +41,34 @@ void	clear_cmd(t_cmd *cmd)
 		clear_tokens(&tmp->commands);
 		clear_tokens(&tmp->redirects);
 		if (tmp->exec)
-			free_arr(tmp->exec);
-		if (tmp->envp)
-			free_arr(tmp->envp);
+			free_arr((void **)tmp->exec);
 		if (tmp->exec_path)
 			free(tmp->exec_path);
 		free(tmp);
 	}
-	cmd = NULL;
+	minishell->cmd = NULL;
 }
 
-void	clear_parser(t_parser *parser)
+void	clear_parser(t_mini *minishell)
 {
-	if (!parser)
+	if (!minishell->parser)
 		return ;
-	if (parser->input)
-		free(parser->input);
-	if (parser->tokens)
-		clear_tokens(&parser->tokens);
-	free(parser);
-	parser = NULL;
+	if (minishell->parser->input)
+		free(minishell->parser->input);
+	if (minishell->parser->tokens)
+		clear_tokens(&minishell->parser->tokens);
+	free(minishell->parser);
+	minishell->parser = NULL;
 }
 
 void	clear(t_mini *minishell)
 {
 	if (minishell->envp)
-		free_arr(minishell->envp);
+		free_arr((void **)minishell->envp);
 	if (minishell->parser)
-		clear_parser(minishell->parser);
+		clear_parser(minishell);
 	if (minishell->cmd)
-		clear_cmd(minishell->cmd);
+		clear_cmd(minishell);
 	rl_clear_history();
 	free(minishell);
 }

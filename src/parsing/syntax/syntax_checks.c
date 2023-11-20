@@ -18,8 +18,7 @@ t_bool	syntax_pipe(t_token *token, int pos)
 	{
 		if (pos == 0 || !token->next)
 		{
-			ft_error("minishell: syntax error near unexpected token\n", \
-						SYNT_ERR, 2);
+			ft_error(token->tkn, 21, 2);
 			return (FALSE);
 		}
 	}
@@ -33,14 +32,13 @@ t_bool	syntax_redirect_io(t_token *token)
 	{
 		if (!token->next)
 		{
-			ft_error(NULL, SYNT_ERR, 2);
+			ft_error(NULL, 21, 2);
 			return (FALSE);
 		}
 		else if (token->next->lexema != WORD && \
 			token->next->lexema != ASSIGN_WORD)
 		{
-			ft_error("minishell: syntax error near unexpected token\n", \
-						SYNT_ERR, 2);
+			ft_error(token->next->tkn, 21, 2);
 			return (FALSE);
 		}
 	}
@@ -66,7 +64,7 @@ t_bool	syntax_quote(t_token *token)
 		}
 		if (flag != -1)
 		{
-			ft_error("minishell: syntax error: quote missing\n", SYNT_ERR_2, 2);
+			ft_error(NULL, QUOTE_MIA, 2);
 			return (FALSE);
 		}
 	}

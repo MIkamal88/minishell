@@ -12,14 +12,14 @@
 
 #include "../include/minishell.h"
 
-t_global	g_glob;
+int	g_exit_code;
 
 int	main(int argc, char **argv, char **envp)
 {
 	t_mini	*minishell;
 
 	if (argc > 1 && argv)
-		exit_err("This program doesn't accept arguments.\n");
+		ft_error("This program doesn't accept arguments.\n", 1, 1);
 	minishell = init_minishell(envp);
 	open_terminal(minishell);
 }

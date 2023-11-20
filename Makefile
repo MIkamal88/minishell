@@ -2,7 +2,7 @@ NAME	= minishell
 LIBFT	= libft.a
 
 CC	= gcc
-CF	= -g -Wall -Wextra -Werror #-fsanitize=address
+CF	= -Wall -Wextra -Werror -g#-fsanitize=address
 CFI	= -I $(INCLUDE)
 CREADLINE	= -lreadline
 
@@ -15,10 +15,11 @@ SRC	= main.c\
 			prompt.c\
 			open_terminal.c\
 			init_minishell.c\
+			signals.c\
 			errors.c\
 			utils.c\
 			clear.c\
-			builtin_pwd.c\
+			ft_pwd.c\
 			lexer.c\
 			token_utils.c\
 			token_utils2.c\
@@ -28,8 +29,6 @@ SRC	= main.c\
 			cmd_table.c\
 			cmd_utils.c\
 			cmd_list.c\
-			exec_line.c\
-			open_pipes.c\
 
 VPATH	:= $(SRC_PATH)\
 			$(SRC_PATH)builtins\
@@ -38,7 +37,6 @@ VPATH	:= $(SRC_PATH)\
  			$(SRC_PATH)parsing/syntax\
  			$(SRC_PATH)parsing/cmd_table\
  			$(SRC_PATH)system\
- 			$(SRC_PATH)execute\
 
 OBJ = $(addprefix $(OBJ_PATH), $(notdir $(SRC:.c=.o)))
 
@@ -75,7 +73,7 @@ fclean:	clean
 	@printf "$(RE)Executable Removed!$(RC)\n"
 
 leak:	all
-	valgrind --suppressions=./local.supp --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME)
+	valgrind --suppressions=./valgrind.txt --leak-check=full --track-origins=yes --show-leak-kinds=all ./$(NAME)
 
 .PHONY:		all clean fclean re
 

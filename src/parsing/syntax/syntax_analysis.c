@@ -49,3 +49,21 @@ t_bool	syntax_analysis(t_parser *parser)
 	}
 	return (TRUE);
 }
+
+int	is_assign_word(char *token)
+{
+	int	i;
+
+	if (ft_strchr(token, '='))
+	{
+		i = 0;
+		while (token[i] != '=')
+		{
+			if (!ft_isalnum(token[i]))
+				return (0);
+			i++;
+		}
+		return (1);
+	}
+	return (0);
+}

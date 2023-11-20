@@ -12,7 +12,26 @@
 
 #include "../../include/minishell.h"
 
-void	free_arr(char **split_arr)
+void	write_err(char *str)
+{
+	int	i;
+
+	i = -1;
+	while (str[++i])
+		write(2, &str[i], 1);
+}
+
+void	exit_errno(char *errfile, int errnb)
+{
+	if (errnb == EACCES)
+		ft_error(errfile, 31, 1);
+	else if (errnb == ENOENT)
+		ft_error(errfile, 32, 1);
+	else
+		ft_error(errfile, 15, 127);
+}
+
+void	free_arr(void **split_arr)
 {
 	int	i;
 
@@ -41,7 +60,7 @@ char	**ft_arrdup(char **arr)
 		rtn[i] = ft_strdup(arr[i]);
 		if (rtn[i] == NULL)
 		{
-			free_arr(rtn);
+			free_arr((void **)rtn);
 			return (rtn);
 		}
 		i++;

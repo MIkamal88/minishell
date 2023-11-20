@@ -11,11 +11,12 @@
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
+#include <stdio.h>
 
 /*	CMD_TABLE
 **	-------------
 **	DESCRIPTION
-**	The command_table function will assemble the t_token list into two different 
+**	The command_table function will assemble the t_token list into two different
 **	commands and redirect list, using the operators as endpoints to simple
 **	commands (ordered into a t_cmd list).
 **	PARAMETERS
@@ -24,13 +25,13 @@
 **	- 
 */
 
-static int	is_redirect(int prev, int curr)
+static t_bool	is_redirect(int prev, int curr)
 {
 	if (curr >= LESS && curr <= DGREAT)
-		return (1);
+		return (TRUE);
 	if (prev >= LESS && prev <= DGREAT)
-		return (1);
-	return (0);
+		return (TRUE);
+	return (FALSE);
 }
 
 static void	cmd_populate(t_cmd **cmd, t_token **list, int *prev)
@@ -68,7 +69,7 @@ void	cmd_table(t_mini *minishell)
 	{
 		cmd_node = cmd_create(minishell->envp, id);
 		cmd_populate(&cmd_node, &list, &prev);
-		cmd_add_back(minishell->cmd, cmd_node);
+		cmd_add_back(&minishell->cmd, cmd_node);
 		id++;
 	}
 	// cmd_expansion;

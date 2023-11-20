@@ -12,16 +12,20 @@
 
 #include "../../include/minishell.h"
 
-static void	read_line(t_mini *minishell)
+static void	read_line(t_mini *minis)
 {
 	char	*prompt;
 
 	prompt = create_prompt();
-	minishell->parser = init_parser();
-	minishell->parser->input = readline(prompt);
-	if (minishell->parser->input)
-		add_history(minishell->parser->input);
+	minis->parser = init_parser();
+	minis->parser->input = readline(prompt);
 	free(prompt);
+	if (!minis->parser->input || (ft_strcmp(minis->parser->input, "exit") == 0))
+	{
+		clear(minis);
+		ft_error("exit\n", 2, 0);
+	}
+	add_history(minis->parser->input);
 }
 
 static t_bool	parse_line(t_mini	*minishell)
@@ -30,8 +34,6 @@ static t_bool	parse_line(t_mini	*minishell)
 	if (!syntax_analysis(minishell->parser))
 		return (FALSE);
 	cmd_table(minishell);
-	if (ft_strcmp(minishell->parser->input, "exit") == 0)
-		terminate(minishell);
 	return (TRUE);
 }
 
@@ -39,13 +41,14 @@ void	open_terminal(t_mini *minishell)
 {
 	while (TRUE)
 	{
-		// Signals;
-		clear_parser(minishell->parser);
+		run_signals();
+		if (minishell->parser)
+			clear_parser(minishell);
+		if (minishell->cmd)
+			clear_cmd(minishell);
 		read_line(minishell);
-		if (g_glob.exit_code == 11)
-			terminate(minishell);
 		if (!parse_line(minishell))
 			continue ;
-		exec_line(minishell);
+		// exec_line(minishell);
 	}
 }

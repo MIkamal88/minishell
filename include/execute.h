@@ -22,16 +22,26 @@ enum e_fd{
 	BOTH,
 };
 
+int		is_builtin(t_cmd *cmd);
+int		is_forked(t_cmd *cmd);
+
+int		ft_exit(char **exec);
+char	*get_pwd(void);
+int		ft_pwd(void);
+int		ft_cd(char **exec);//??//
+int		ft_echo(char **exec);
+
+void	exec_builtin_in_child(t_cmd *cmd);
+void	exec_builtin_in_parent(t_cmd *cmd);
+
+void	change_exec(t_cmd *cmd, int pos);
+void	assign_word(t_cmd *cmd);
+
+void	close_fds(t_cmd *cmd);
+void	close_fd(t_cmd *cmd, int flag);
+
+char	*get_path(t_cmd *cmd);
 void	exec_commands_child_signals(void);
 void	exec_commands_parent_signals(void);
-void	exec_child(t_cmd *cmd);
-void	exec_builtin_in_parent(t_cmd *cmd);
-void	exec_builtin_in_child(t_cmd *cmd);
-void	close_fds(t_cmd *comm);
-void	close_fd(t_cmd *cmd, int fd_flag);
-char	*get_path(t_cmd *cmd);
-
-t_bool	is_builtin(t_cmd *cmd);
-t_bool	is_forked(t_cmd *cmd);
 
 #endif

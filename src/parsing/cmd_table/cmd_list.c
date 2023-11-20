@@ -32,7 +32,7 @@ static char	**put_in_list(t_token *token)
 	size = tkn_len(token)+ 1;
 	list = ft_calloc(sizeof(char *), size);
 	if (!list)
-		ft_error(NULL, ALLOC, 11);
+		ft_error(NULL, EXIT, 12);
 	i = 0;
 	while (token)
 	{

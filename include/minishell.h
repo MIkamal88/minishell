@@ -30,19 +30,22 @@
 
 enum	e_mini_err
 {
-	QUOTE = 1,
-	NDIR = 2,
-	SIG = 3,
-	TKN_ERR = 4,
-	DUPERR = 7,
-	FORKERR = 8,
-	SYNT_ERR = 9,
-	SYNT_ERR_2 = 10,
-	ALLOC = 11,
-	CMD_P = 12,
-	CMD_NA = 13,
-	NOT_DIR = 14,
-	ARGS = 15
+	EXIT = 0,
+	ARGS = 1,
+	EXIT_CMD = 2,
+	EXIT_HEREDOC_SIG = 3,
+	CD_NOT_SET = 11,
+	CD_NO_F_OR_D = 12,
+	CMD_ARGS = 14,
+	CMD_MIA = 15,
+	EXPORT = 16,
+	SYNT_ERR_TOKEN = 21,
+	QUOTE_MIA = 22,
+	PERM_DENIED = 31,
+	F_D_MIA = 32,
+	HERE_DOC_EOF = 33,
+	QUIT = 34,
+	NEW_L = 35,
 };
 
 typedef struct s_mini
@@ -52,37 +55,30 @@ typedef struct s_mini
 	t_parser	*parser;
 }	t_mini;
 
-typedef struct s_global
-{
-	int	exit_code;
-}	t_global;
-
-extern t_global	g_glob;
+extern int	g_exit_code;
 
 t_mini		*init_minishell(char **envp);
 t_parser	*init_parser(void);
 
-char		*get_pwd(void);
-int			builtin_pwd(void);
 char		*create_prompt(void);
+void		run_signals(void);
 void		open_terminal(t_mini *minishell);
 
 void		cmd_table(t_mini *minishell);
 void		cmd_list(t_mini *minishell);
 
 void		exec_line(t_mini *minishell);
-void		open_pipes(t_mini *minishell);
-t_bool		define_redirects(t_mini *minishell);
+void		exec_cmds(t_mini *minishell);
 
-void		ft_error(char *s, int err, int code);
-void		terminate(t_mini *minishell);
-void		exit_err(char *err, int errnb);
+void		ft_error(char *str, int err, int code);
+void		write_err(char *str);
+void		exit_errno(char *errfile, int errnb);
 void		clear(t_mini *minishell);
-void		clear_parser(t_parser *parser);
-void		clear_cmd(t_cmd *cmd);
+void		clear_parser(t_mini *minishell);
+void		clear_cmd(t_mini *minishell);
 
 char		**ft_arrdup(char **arr);
 char		*ft_strnjoin(int argn, ...);
-void		free_arr(char **split_arr);
+void		free_arr(void **split_arr);
 
 #endif

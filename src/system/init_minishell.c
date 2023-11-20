@@ -18,12 +18,14 @@ t_mini	*init_minishell(char **envp)
 
 	minishell = malloc(sizeof(t_mini));
 	if (!minishell)
-		terminate(minishell);
+		ft_error(NULL, EXIT, 12);
 	minishell->envp = ft_arrdup(envp);
+	if (!minishell->envp)
+		ft_error(NULL, EXIT, 12);
 	minishell->parser = init_parser();
-	minishell->cmd = NULL;
 	if (!minishell->parser)
-		terminate(minishell);
+		ft_error(NULL, EXIT, 12);
+	minishell->cmd = NULL;
 	return (minishell);
 }
 
@@ -33,7 +35,7 @@ t_parser	*init_parser(void)
 
 	parser = malloc(sizeof(t_parser));
 	if (!parser)
-		ft_error(NULL, ALLOC, 11);
+		ft_error(NULL, EXIT, 12);
 	parser->input = NULL;
 	parser->tokens = NULL;
 	return (parser);

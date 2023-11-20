@@ -64,7 +64,6 @@ typedef struct s_parser
 # define METACHAR	"|<>&()"
 # define METACHARS	"|<>&() "
 
-t_parser	*init_parser(void);
 t_token		*create_token(char *tkn, int flag);
 void		tokenize_input(t_parser *parser);
 int			lexical_analysis(char *token);
@@ -74,14 +73,15 @@ t_token		*tkn_dup(t_token *original);
 int			tkn_len(t_token *token);
 
 t_cmd		*cmd_create(char **envp, int id);
+void		cmd_add_back(t_cmd **cmd, t_cmd *last);
 void		cmd_expansion(t_cmd *cmd);
-void		cmd_add_back(t_cmd *cmd, t_cmd *node);
 void		swap_token(t_token *token, char	*new_token);
 void		tilde_expansion(t_token **token, int *pos);
 void		quote_expansion(t_token **token, int *pos, char quote);
 void		variable_expansion(t_token **tkn, int *pos);
 
 t_bool		syntax_analysis(t_parser *parser);
+int			is_assign_word(char *token);
 t_bool		syntax_pipe(t_token *token, int pos);
 t_bool		syntax_redirect_io(t_token *token);
 t_bool		syntax_quote(t_token *token);

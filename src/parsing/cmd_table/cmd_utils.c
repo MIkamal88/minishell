@@ -18,7 +18,7 @@ t_cmd	*cmd_create(char **envp, int id)
 
 	cmd = malloc(sizeof(t_cmd));
 	if (!cmd)
-		ft_error(NULL, ALLOC, 11);
+		ft_error(NULL, EXIT, 12);
 	cmd->id = id;
 	cmd->commands = NULL;
 	cmd->redirects = NULL;
@@ -35,18 +35,18 @@ t_cmd	*cmd_create(char **envp, int id)
 	return (cmd);
 }
 
-void	cmd_add_back(t_cmd *cmd, t_cmd *node)
+void	cmd_add_back(t_cmd **cmd, t_cmd *last)
 {
 	t_cmd	*cmd_list;
 
-	cmd_list = cmd;
+	cmd_list = (*cmd);
 	if (!cmd_list)
-		cmd = node;
+		(*cmd) = last;
 	else
 	{
 		while (cmd_list->next)
 			cmd_list = cmd_list->next;
-		cmd_list->next = node;
+		cmd_list->next = last;
 	}
 }
 
