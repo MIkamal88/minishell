@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_table.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anayef <anayef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 17:43:51 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/09/09 17:43:51 by m_kamal          ###   ########.fr       */
+/*   Updated: 2023/11/29 20:24:15 by anayef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../include/minishell.h"
-#include <stdio.h>
 
 /*	CMD_TABLE
 **	-------------
@@ -72,6 +71,6 @@ void	cmd_table(t_mini *minishell)
 		cmd_add_back(&minishell->cmd, cmd_node);
 		id++;
 	}
-	// cmd_expansion;
+	// cmd_expansion(minishell->cmd);
 	cmd_list(minishell);
 }

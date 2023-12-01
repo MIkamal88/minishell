@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anayef <anayef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:48:32 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/08/31 15:48:32 by m_kamal          ###   ########.fr       */
+/*   Updated: 2023/11/23 20:59:37 by anayef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		token_add_back(t_token **list, t_token *token);
 t_bool		is_new_token(const char *input, int index, int prev);
 t_token		*tkn_dup(t_token *original);
 int			tkn_len(t_token *token);
-
+void		cmd_expansion(t_cmd *cmd);
 t_cmd		*cmd_create(char **envp, int id);
 void		cmd_add_back(t_cmd **cmd, t_cmd *last);
 void		cmd_expansion(t_cmd *cmd);

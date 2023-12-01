@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anayef <anayef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:52:15 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/08/24 18:52:16 by m_kamal          ###   ########.fr       */
+/*   Updated: 2023/11/27 21:13:19 by anayef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ typedef struct s_mini
 {
 	char		**envp;
 	t_cmd		*cmd;
+	t_env		*env_list;
 	t_parser	*parser;
 }	t_mini;
 
@@ -80,5 +81,10 @@ void		clear_cmd(t_mini *minishell);
 char		**ft_arrdup(char **arr);
 char		*ft_strnjoin(int argn, ...);
 void		free_arr(void **split_arr);
+
+void		exec_line(t_mini *minishell);
+void		exec_builtin(char **args, t_mini *minishell);
+
+int			ft_exit(char **exec, t_mini *minishell);
 
 #endif

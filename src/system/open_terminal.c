@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   open_terminal.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anayef <anayef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 08:05:07 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/09/01 08:05:07 by m_kamal          ###   ########.fr       */
+/*   Updated: 2023/11/29 21:01:21 by anayef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,11 @@ static void	read_line(t_mini *minis)
 
 	prompt = create_prompt();
 	minis->parser = init_parser();
+	if (!minis->parser)
+		ft_error(NULL, EXIT, 12);
 	minis->parser->input = readline(prompt);
 	free(prompt);
-	if (!minis->parser->input || (ft_strcmp(minis->parser->input, "exit") == 0))
+	if (!minis->parser->input)
 	{
 		clear(minis);
 		ft_error("exit\n", 2, 0);
@@ -49,6 +51,6 @@ void	open_terminal(t_mini *minishell)
 		read_line(minishell);
 		if (!parse_line(minishell))
 			continue ;
-		// exec_line(minishell);
+		exec_line(minishell);
 	}
 }

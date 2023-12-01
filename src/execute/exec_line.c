@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_line.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anayef <anayef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 11:38:02 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/11/08 11:38:02 by m_kamal          ###   ########.fr       */
+/*   Updated: 2023/11/29 21:13:17 by anayef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,26 @@ void	exec_line(t_mini *minishell)
 {
 	// open_pipes();
 	// if (!define_redirects())
-		// return ;
+	// 	return ;
 	exec_cmds(minishell);
+}
+
+void	exec_cmds(t_mini *minishell)
+{
+	t_cmd	*cmd;
+	char	**args;
+
+	cmd = minishell->cmd;
+	while (cmd)
+	{
+		args = cmd->exec;
+		if (args != NULL)
+		{
+			if (is_builtin(args[0]))
+				exec_builtin(args, minishell);
+			else
+				exec_external_cmd(args, minishell->envp);
+		}
+		cmd = cmd->next;
+	}
 }

@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anayef <anayef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:23:43 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/11/08 15:23:43 by m_kamal          ###   ########.fr       */
+/*   Updated: 2023/11/27 21:14:44 by anayef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/minishell.h"
 
-void	exec_builtin_in_parent(t_cmd *cmd)
+/*void	exec_builtin_in_parent(t_cmd *cmd)
 {
 	if (!ft_strncmp(cmd->exec_path, "cd\0", 3))
 		g_exit_code = ft_cd(cmd->exec);
@@ -37,4 +37,22 @@ void	exec_builtin_in_child(t_cmd *cmd)
 		g_exit_code = ft_echo(cmd->exec);
 	else if (!ft_strncmp(cmd->exec_path, "pwd\0", 4))
 		g_exit_code = ft_pwd();
+}*/
+
+void	exec_builtin(char **args, t_mini *minishell)
+{
+	if (ft_strcmp(args[0], "echo") == 0)
+		builtin_echo(args);
+	else if (ft_strcmp(args[0], "pwd") == 0)
+		builtin_pwd();
+	else if (ft_strcmp(args[0], "cd") == 0)
+		builtin_cd(args);
+	else if (ft_strcmp(args[0], "exit") == 0)
+		ft_exit(args, minishell);
+	else if (ft_strcmp(args[0], "export") == 0)
+		builtin_export(args, &(minishell->env_list));
+	else if (ft_strcmp(args[0], "unset") == 0)
+		builtin_unset(args, &(minishell->env_list));
+	else if (ft_strcmp(args[0], "env") == 0)
+		builtin_env(&(minishell->env_list));
 }

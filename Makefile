@@ -1,8 +1,8 @@
 NAME	= minishell
 LIBFT	= libft.a
 
-CC	= gcc
-CF	= -Wall -Wextra -Werror -g#-fsanitize=address
+CC	= gcc -g
+CF	= -Wall -Wextra -Werror #-fsanitize=address
 CFI	= -I $(INCLUDE)
 CREADLINE	= -lreadline
 
@@ -28,12 +28,24 @@ SRC	= main.c\
 			syntax_checks.c\
 			cmd_table.c\
 			cmd_utils.c\
+			is_builtin.c\
+			exec_line.c\
+			exec_builtin.c\
+			exec_external.c\
+			exec_ex_utils.c\
+			ft_echo.c\
+			ft_export.c\
+			ft_export_utils.c\
+			ft_unset.c\
+			ft_env.c\
+			ft_exit.c\
 			cmd_list.c\
 
 VPATH	:= $(SRC_PATH)\
-			$(SRC_PATH)builtins\
  			$(SRC_PATH)utils\
  			$(SRC_PATH)parsing\
+ 			$(SRC_PATH)execute\
+			$(SRC_PATH)builtins\
  			$(SRC_PATH)parsing/syntax\
  			$(SRC_PATH)parsing/cmd_table\
  			$(SRC_PATH)system\

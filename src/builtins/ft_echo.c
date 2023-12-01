@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_echo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anayef <anayef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 15:28:01 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/11/08 15:28:01 by m_kamal          ###   ########.fr       */
+/*   Updated: 2023/11/27 21:28:51 by anayef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,22 +22,17 @@
 **	0 for sucess, 1 for error.
 */
 
-int	ft_echo(char **exec)
+void	builtin_echo(char **args)
 {
-	char	*flag;
-	int		i;
+	int	i;
 
-	flag = NULL;
 	i = 1;
-	if (exec[i] && *exec[i] == '-')
-		flag = &exec[i++][1];
-	while (exec[i])
+	while (args[i] != NULL)
 	{
-		printf("%s", exec[i++]);
-		if (exec[i])
+		printf("%s", args[i]);
+		if (args[i + 1] != NULL)
 			printf(" ");
+		i++;
 	}
-	if (ft_strncmp(flag, "n\0", 2))
-		printf("\n");
-	return (0);
+	printf("\n");
 }

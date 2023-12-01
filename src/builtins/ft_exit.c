@@ -25,7 +25,7 @@ static int	is_numberic(char *param)
 	return (1);
 }
 
-int	ft_exit(char **exec)
+int	ft_exit(char **exec, t_mini *minishell)
 {
 	int	ret;
 
@@ -41,6 +41,7 @@ int	ft_exit(char **exec)
 		if (ret < 0 || ret > 255)
 			ret = 128;
 	}
+	clear(minishell);
 	ft_error("exit", 1, ret);
 	return (0);
 }

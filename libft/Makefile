@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: mshehata <mshehata@student.42.fr>          +#+  +:+       +#+         #
+#    By: anayef <anayef@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/21 13:27:21 by mshehata          #+#    #+#              #
-#    Updated: 2022/12/03 14:03:04 by mshehata         ###   ########.fr        #
+#    Updated: 2023/11/27 20:00:23 by anayef           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,8 +21,8 @@ OUTN = $(Library).a
 SRC_PATH	= ./srcs/
 OBJ_PATH	= ./build/
 
-SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c\
-			ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c\
+SRC = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c ft_strcpy.c\
+			ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strcat.c\
 			ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c\
 			ft_strrchr.c ft_strcmp.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c\
 			ft_calloc.c ft_strdup.c ft_strndup.c ft_itoa.c get_next_line.c\

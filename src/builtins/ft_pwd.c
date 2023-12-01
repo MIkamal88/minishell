@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anayef <anayef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 15:31:06 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/08/31 15:31:06 by m_kamal          ###   ########.fr       */
+/*   Updated: 2023/11/27 21:21:37 by anayef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,27 @@ char	*get_pwd(void)
 	return (getcwd(buffer, 0));
 }
 
-int	ft_pwd(void)
+void	builtin_pwd(void)
 {
-	char	*pwd;
+	char	*cwd;
 
-	pwd = get_pwd();
-	printf("%s\n", pwd);
-	free(pwd);
-	return (0);
+	cwd = getcwd(NULL, 0);
+	if (cwd != NULL)
+	{
+		printf("%s\n", cwd);
+		free(cwd);
+	}
+	else
+		return ;
+}
+
+void	builtin_cd(char **args)
+{
+	if (args[1] == NULL)
+		return ;
+	else
+	{
+		if (chdir(args[1]) != 0)
+			printf("bash: cd: %s : No such file or directory\n", args[1]);
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anayef <anayef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 07:33:54 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/09/30 07:33:54 by m_kamal          ###   ########.fr       */
+/*   Updated: 2023/11/27 21:57:04 by anayef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,36 @@ enum e_fd{
 	BOTH,
 };
 
-int		is_builtin(t_cmd *cmd);
-int		is_forked(t_cmd *cmd);
+typedef struct s_env
+{
+	char			*variable;
+	char			*value;
+	struct s_env	*next;
+}	t_env;
 
-int		ft_exit(char **exec);
+int		is_forked(t_cmd *cmd);
 char	*get_pwd(void);
-int		ft_pwd(void);
-int		ft_cd(char **exec);//??//
-int		ft_echo(char **exec);
+void	builtin_pwd(void);
+int		ft_cd(char **exec);
+void	builtin_echo(char **args);
+void	builtin_cd(char **args);
+void	builtin_export(char **args, t_env **env_list);
+void	handle_export_with_argument(char **args, t_env **env_list);
+void	handle_export_without_arguments(t_env *env_list);
+char	*get_value_from_argument(char *arg);
+char	*get_variable_from_argument(char *arg);
+void	update_env_value(t_env *env_list, char *variable, char *new_value);
+void	builtin_unset(char **args, t_env **env_list);
+void	builtin_env(t_env **env_list);
+void	exec_external_cmd(char **args, char **envp);
+char	*build_executable_path(char *dir, char *cmd);
+char	**get_directories_from_path(void);
+int		is_builtin(char *command);
+
+t_env	*create_env_node(const char *variable, const char *value);
+void	add_env_variable(t_env **env_list, \
+	const char *variable, const char *value);
+void	free_env_list(t_env *env_list);
 
 void	exec_builtin_in_child(t_cmd *cmd);
 void	exec_builtin_in_parent(t_cmd *cmd);

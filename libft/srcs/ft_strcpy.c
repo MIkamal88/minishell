@@ -1,25 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anayef <anayef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/24 18:58:28 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/11/29 20:53:30 by anayef           ###   ########.fr       */
+/*   Created: 2023/11/27 19:57:46 by anayef            #+#    #+#             */
+/*   Updated: 2023/11/27 20:05:20 by anayef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../includes/libft.h"
 
-int	g_exit_code;
-
-int	main(int argc, char **argv, char **envp)
+char	*ft_strcpy(char *dest, const char *src)
 {
-	t_mini	*minishell;
+	char	*str;
 
-	if (argc > 1 && argv)
-		ft_error("This program doesn't accept arguments.\n", 1, 1);
-	minishell = init_minishell(envp);
-	open_terminal(minishell);
+	str = dest;
+	if (dest == NULL || src == NULL)
+		return (NULL);
+	while (*src != '\0')
+	{
+		*dest = *src;
+		dest++;
+		src++;
+	}
+	*dest = '\0';
+	return (str);
 }
