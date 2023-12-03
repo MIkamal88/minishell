@@ -27,54 +27,54 @@
 **	
 */
 
-static void	token_expansion(t_token **token)
-{
-	int	pos;
-
-	pos = 0;
-	if ((*token)->tkn[pos] == '~')
-		tilde_expansion(token, &pos);
-	while ((*token)->tkn[pos])
-	{
-		if ((*token)->tkn[pos] == '$')
-			variable_expansion(token, &pos);
-		else if ((*token)->tkn[pos] == '\'' || (*token)->tkn[pos] == '\"')
-			quote_expansion(token, &pos, (*token)->tkn[pos]);
-		pos++;
-	}
-}
-
-static void	expand_redirects(t_cmd *cmd)
-{
-	t_token	*token;
-
-	token = cmd->redirects;
-	while (token)
-	{
-		if (ft_strncmp(token->tkn, "<<", 3))
-		{
-			token = token->next;
-			token_expansion(&token);
-		}
-		else
-			token = token->next;
-		token = token->next;
-	}
-}
-
-void	cmd_expansion(t_cmd *cmd)
-{
-	t_token	*token;
-
-	while (cmd)
-	{
-		token = cmd->commands;
-		while (token)
-		{
-			token_expansion(&token);
-			token = token->next;
-		}
-		expand_redirects(cmd);
-		cmd = cmd->next;
-	}
-}
+// static void	token_expansion(t_token **token)
+// {
+// 	int	pos;
+//
+// 	pos = 0;
+// 	if ((*token)->tkn[pos] == '~')
+// 		tilde_expansion(token, &pos);
+// 	while ((*token)->tkn[pos])
+// 	{
+// 		if ((*token)->tkn[pos] == '$')
+// 			variable_expansion(token, &pos);
+// 		else if ((*token)->tkn[pos] == '\'' || (*token)->tkn[pos] == '\"')
+// 			quote_expansion(token, &pos, (*token)->tkn[pos]);
+// 		pos++;
+// 	}
+// }
+//
+// static void	expand_redirects(t_cmd *cmd)
+// {
+// 	t_token	*token;
+//
+// 	token = cmd->redirects;
+// 	while (token)
+// 	{
+// 		if (ft_strncmp(token->tkn, "<<", 3))
+// 		{
+// 			token = token->next;
+// 			token_expansion(&token);
+// 		}
+// 		else
+// 			token = token->next;
+// 		token = token->next;
+// 	}
+// }
+//
+// void	cmd_expansion(t_cmd *cmd)
+// {
+// 	t_token	*token;
+//
+// 	while (cmd)
+// 	{
+// 		token = cmd->commands;
+// 		while (token)
+// 		{
+// 			token_expansion(&token);
+// 			token = token->next;
+// 		}
+// 		expand_redirects(cmd);
+// 		cmd = cmd->next;
+// 	}
+// }

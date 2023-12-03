@@ -20,7 +20,7 @@ char	*get_pwd(void)
 	return (getcwd(buffer, 0));
 }
 
-void	builtin_pwd(void)
+void	ft_pwd(void)
 {
 	char	*cwd;
 
@@ -34,13 +34,13 @@ void	builtin_pwd(void)
 		return ;
 }
 
-void	builtin_cd(char **args)
+void	ft_cd(char **exec)
 {
-	if (args[1] == NULL)
+	if (exec[1] == NULL)
 		return ;
 	else
 	{
-		if (chdir(args[1]) != 0)
-			printf("bash: cd: %s : No such file or directory\n", args[1]);
+		if (chdir(exec[1]) != 0)
+			ft_error(exec[1], 12, 1);
 	}
 }

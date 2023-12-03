@@ -22,7 +22,7 @@
 **	0 for sucess, 1 for error.
 */
 
-void	builtin_echo(char **args)
+void	ft_echo(char **args)
 {
 	int	i;
 

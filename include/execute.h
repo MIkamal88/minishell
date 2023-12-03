@@ -30,19 +30,20 @@ typedef struct s_env
 }	t_env;
 
 int		is_forked(t_cmd *cmd);
-char	*get_pwd(void);
-void	builtin_pwd(void);
-int		ft_cd(char **exec);
-void	builtin_echo(char **args);
-void	builtin_cd(char **args);
-void	builtin_export(char **args, t_env **env_list);
+void	ft_export(char **args, t_env **env_list);
 void	handle_export_with_argument(char **args, t_env **env_list);
 void	handle_export_without_arguments(t_env *env_list);
 char	*get_value_from_argument(char *arg);
 char	*get_variable_from_argument(char *arg);
+
 void	update_env_value(t_env *env_list, char *variable, char *new_value);
-void	builtin_unset(char **args, t_env **env_list);
-void	builtin_env(t_env **env_list);
+void	ft_unset(char **args, t_env **env_list);
+void	ft_env(t_env **env_list);
+
+char	*get_pwd(void);
+void	ft_pwd(void);
+void	ft_cd(char **exec);
+void	ft_echo(char **args);
 void	exec_external_cmd(char **args, char **envp);
 char	*build_executable_path(char *dir, char *cmd);
 char	**get_directories_from_path(void);

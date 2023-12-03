@@ -55,7 +55,7 @@ void	remove_variable(t_env **env_list, t_env *variable_to_remove)
 	free(variable_to_remove);
 }
 
-void	builtin_unset(char **args, t_env **env_list)
+void	ft_unset(char **args, t_env **env_list)
 {
 	t_env	*variable_to_remove;
 	int		i;

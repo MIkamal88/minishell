@@ -70,6 +70,8 @@ void		cmd_list(t_mini *minishell);
 
 void		exec_line(t_mini *minishell);
 void		exec_cmds(t_mini *minishell);
+void		exec_line(t_mini *minishell);
+void		exec_builtin(char **args, t_mini *minishell);
 
 void		ft_error(char *str, int err, int code);
 void		write_err(char *str);
@@ -81,9 +83,6 @@ void		clear_cmd(t_mini *minishell);
 char		**ft_arrdup(char **arr);
 char		*ft_strnjoin(int argn, ...);
 void		free_arr(void **split_arr);
-
-void		exec_line(t_mini *minishell);
-void		exec_builtin(char **args, t_mini *minishell);
 
 int			ft_exit(char **exec, t_mini *minishell);
 

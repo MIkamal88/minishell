@@ -12,7 +12,7 @@
 
 #include "../../include/minishell.h"
 
-void	clear_tokens(t_token **tokens)
+static void	clear_tokens(t_token **tokens)
 {
 	t_token	*curr;
 	t_token	*tmp;

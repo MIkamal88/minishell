@@ -71,7 +71,7 @@ void	update_env_value(t_env *env_list, char *variable, char *new_value)
 	}
 }
 
-void	builtin_export(char **args, t_env **env_list)
+void	ft_export(char **args, t_env **env_list)
 {
 	if (args[1] == NULL)
 		handle_export_without_arguments(*env_list);

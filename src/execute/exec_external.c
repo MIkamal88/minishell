@@ -46,7 +46,7 @@ int	execute_command(char **args, char **envp, char **directories)
 	}
 	else
 	{
-		printf("Command not found in PATH\n");
+		ft_error(args[0], 15, 127);
 		return (0);
 	}
 }

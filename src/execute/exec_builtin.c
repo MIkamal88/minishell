@@ -42,17 +42,17 @@ void	exec_builtin_in_child(t_cmd *cmd)
 void	exec_builtin(char **args, t_mini *minishell)
 {
 	if (ft_strcmp(args[0], "echo") == 0)
-		builtin_echo(args);
+		ft_echo(args);
 	else if (ft_strcmp(args[0], "pwd") == 0)
-		builtin_pwd();
+		ft_pwd();
 	else if (ft_strcmp(args[0], "cd") == 0)
-		builtin_cd(args);
+		ft_cd(args);
 	else if (ft_strcmp(args[0], "exit") == 0)
 		ft_exit(args, minishell);
 	else if (ft_strcmp(args[0], "export") == 0)
-		builtin_export(args, &(minishell->env_list));
+		ft_export(args, &(minishell->env_list));
 	else if (ft_strcmp(args[0], "unset") == 0)
-		builtin_unset(args, &(minishell->env_list));
+		ft_unset(args, &(minishell->env_list));
 	else if (ft_strcmp(args[0], "env") == 0)
-		builtin_env(&(minishell->env_list));
+		ft_env(&(minishell->env_list));
 }

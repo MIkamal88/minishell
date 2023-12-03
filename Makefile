@@ -12,34 +12,38 @@ OBJ_PATH		= ./build/
 INCLUDE			= ./include/
 
 SRC	= main.c\
-			prompt.c\
-			open_terminal.c\
 			init_minishell.c\
+			open_terminal.c\
+			prompt.c\
 			signals.c\
+			clear.c\
 			errors.c\
 			utils.c\
-			clear.c\
-			ft_pwd.c\
 			lexer.c\
 			token_utils.c\
 			token_utils2.c\
 			tokenizer.c\
 			syntax_analysis.c\
 			syntax_checks.c\
+			cmd_list.c\
 			cmd_table.c\
 			cmd_utils.c\
-			is_builtin.c\
+			cmd_expansion.c\
+			quote_expansion.c\
+			tilde_expansion.c\
+			variable_expansion.c\
 			exec_line.c\
 			exec_builtin.c\
 			exec_external.c\
 			exec_ex_utils.c\
+			ft_cd.c\
 			ft_echo.c\
+			ft_env.c\
+			ft_exit.c\
 			ft_export.c\
 			ft_export_utils.c\
 			ft_unset.c\
-			ft_env.c\
-			ft_exit.c\
-			cmd_list.c\
+			is_builtin.c\
 
 VPATH	:= $(SRC_PATH)\
  			$(SRC_PATH)utils\

@@ -35,6 +35,7 @@ t_bool	syntax_analysis(t_parser *parser)
 	int		pos;
 
 	token = parser->tokens;
+	pos = 0;
 	syntax_word_assignment(parser);
 	while (token)
 	{
