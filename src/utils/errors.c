@@ -28,27 +28,6 @@ static void	cd_err(char *str, int err)
 	}
 }
 
-static void	exec_err(char *str, int err)
-{
-	if (err == 14)
-	{
-		write_err("Minishell: ");
-		write_err(str);
-		write_err(": Too many arguments");
-	}
-	if (err == 15)
-	{
-		write_err(str);
-		write_err(": Command not found\n");
-	}
-	if (err == 16)
-	{
-		write_err("Minishell: export: ");
-		write_err(str);
-		write_err(": not a valid identifier\n");
-	}
-}
-
 static void	syntax_err(char *str, int err)
 {
 	if (err == 21)
@@ -88,13 +67,34 @@ static void	redirect_err(char *str, int err)
 		write_err("\n");
 }
 
+static void	exec_err(char *str, int err)
+{
+	if (err == 14)
+	{
+		write_err("Minishell: ");
+		write_err(str);
+		write_err(": Too many arguments\n");
+	}
+	if (err == 15)
+	{
+		write_err(str);
+		write_err(": Command not found\n");
+	}
+	if (err == 16)
+	{
+		write_err("Minishell: export: ");
+		write_err(str);
+		write_err(": not a valid identifier\n");
+	}
+}
+
 void	ft_error(char *str, int err, int code)
 {
 	g_exit_code = code;
-	if (err > 0 && err < 10)
+	if (err >= 0 && err < 10)
 		write_err(str);
 	if (err >= 0 && err < 10)
-		exit(0);
+		exit(g_exit_code);
 	if (err >= 11 && err <= 12)
 		cd_err(str, err);
 	if (err >= 14 && err <= 16)

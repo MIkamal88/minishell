@@ -12,14 +12,14 @@
 
 #include "../../include/minishell.h"
 
-static int	is_numberic(char *param)
+static int	is_numeric(char *arg)
 {
 	int	i;
 
 	i = -1;
-	while (param[++i])
+	while (arg[++i])
 	{
-		if (!ft_isdigit(param[i]) && param[i] != '+' && param[i] != '-')
+		if (!ft_isdigit(arg[i]) && arg[i] != '+' && arg[i] != '-')
 			return (0);
 	}
 	return (1);
@@ -35,13 +35,20 @@ int	ft_exit(char **exec, t_mini *minishell)
 		ft_error("exit", 14, 1);
 		return (1);
 	}
-	if (exec[1] && is_numberic(exec[1]))
+	if (exec[1] && is_numeric(exec[1]))
 	{
 		ret = ft_atoi(exec[1]);
 		if (ret < 0 || ret > 255)
 			ret = 128;
 	}
+	if (exec[1] && !is_numeric(exec[1]))
+	{
+		ret = 2;
+		write_err("Minishell: exit: ");
+		write_err(exec[1]);
+		write_err(": numeric argument required\n");
+	}
 	clear(minishell);
-	ft_error("exit", 1, ret);
+	ft_error("exit", EXIT_CMD, ret);
 	return (0);
 }

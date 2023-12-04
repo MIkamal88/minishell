@@ -22,17 +22,22 @@
 **	0 for sucess, 1 for error.
 */
 
-void	ft_echo(char **args)
+int	ft_echo(char **exec)
 {
-	int	i;
+	char	*flag;
+	int		i;
 
+	flag = NULL;
 	i = 1;
-	while (args[i] != NULL)
+	if (exec[i] && *exec[i] == '-')
+		flag = &exec[i++][1];
+	while (exec[i])
 	{
-		printf("%s", args[i]);
-		if (args[i + 1] != NULL)
+		printf("%s", exec[i++]);
+		if (exec[i])
 			printf(" ");
-		i++;
 	}
-	printf("\n");
+	if (ft_strncmp(flag, "n\0", 2))
+		printf("\n");
+	return (0);
 }

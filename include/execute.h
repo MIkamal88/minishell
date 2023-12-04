@@ -43,7 +43,7 @@ void	ft_env(t_env **env_list);
 char	*get_pwd(void);
 void	ft_pwd(void);
 void	ft_cd(char **exec);
-void	ft_echo(char **args);
+int		ft_echo(char **args);
 void	exec_external_cmd(char **args, char **envp);
 char	*build_executable_path(char *dir, char *cmd);
 char	**get_directories_from_path(void);
