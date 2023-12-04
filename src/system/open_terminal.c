@@ -25,7 +25,7 @@ static void	read_line(t_mini *minis)
 	if (!minis->parser->input)
 	{
 		clear(minis);
-		ft_error("exit\n", 2, 0);
+		ft_error("exit\n", EXIT, 0);
 	}
 	add_history(minis->parser->input);
 }

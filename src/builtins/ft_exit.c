@@ -12,6 +12,18 @@
 
 #include "../../include/minishell.h"
 
+/*	FT_EXIT
+ *	-------
+ *	DESCRIPTION
+ *	Exits minishell in a similar fashion to bash
+ *	if a valid value is entered, it'll be used as
+ *	exit code.
+ *	PARAMETERS
+ *	#1. Complete exec list of parameters.
+ *	RETURN VALUES
+ *	-
+*/
+
 static int	is_numeric(char *arg)
 {
 	int	i;

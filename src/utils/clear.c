@@ -61,8 +61,27 @@ void	clear_parser(t_mini *minishell)
 	minishell->parser = NULL;
 }
 
+void	clear_env(t_mini *minishell)
+{
+	t_env	*curr;
+	t_env	*tmp;
+
+	curr = minishell->env;
+	while (curr)
+	{
+		tmp = curr;
+		curr = curr->next;
+		free(tmp->key);
+		free(tmp->value);
+		free(tmp);
+	}
+	minishell->env = NULL;
+}
+
 void	clear(t_mini *minishell)
 {
+	if (minishell->env)
+		clear_env(minishell);
 	if (minishell->envp)
 		free_arr((void **)minishell->envp);
 	if (minishell->parser)

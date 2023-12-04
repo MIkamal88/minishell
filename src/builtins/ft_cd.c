@@ -12,6 +12,28 @@
 
 #include "../../include/minishell.h"
 
+/*	FT_CD
+ *	-----
+ *	DESCRIPTION
+ *	Changes Current directory to a specified one
+ *	PARAMETERS
+ *	#1. Complete exec list of parameters
+ *	RETURN VALUES
+ *	-
+ *	FT_PWD
+ *	------
+ *	DESCRIPTION
+ *	Prints Current Directory
+ *	PARAMETERS
+ *	-
+ *	RETURN
+ *	-
+*/
+
+/*
+*	Need to check if $HOME and ~ are supposed to work in ft_cd or not.
+*/
+
 char	*get_pwd(void)
 {
 	char	*buffer;

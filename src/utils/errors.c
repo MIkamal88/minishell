@@ -82,9 +82,9 @@ static void	exec_err(char *str, int err)
 	}
 	if (err == 16)
 	{
-		write_err("Minishell: export: ");
+		write_err("Minishell: export: '");
 		write_err(str);
-		write_err(": not a valid identifier\n");
+		write_err("' : not a valid identifier\n");
 	}
 }
 

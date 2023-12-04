@@ -24,21 +24,20 @@ enum e_fd{
 
 typedef struct s_env
 {
-	char			*variable;
+	char			*key;
 	char			*value;
 	struct s_env	*next;
 }	t_env;
 
+t_bool	check_params(char *argv);
+t_bool	is_valid_key(char *key);
 int		is_forked(t_cmd *cmd);
-void	ft_export(char **args, t_env **env_list);
 void	handle_export_with_argument(char **args, t_env **env_list);
 void	handle_export_without_arguments(t_env *env_list);
 char	*get_value_from_argument(char *arg);
 char	*get_variable_from_argument(char *arg);
 
 void	update_env_value(t_env *env_list, char *variable, char *new_value);
-void	ft_unset(char **args, t_env **env_list);
-void	ft_env(t_env **env_list);
 
 char	*get_pwd(void);
 void	ft_pwd(void);

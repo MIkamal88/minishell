@@ -50,9 +50,9 @@ void	exec_builtin(char **args, t_mini *minishell)
 	else if (ft_strcmp(args[0], "exit") == 0)
 		ft_exit(args, minishell);
 	else if (ft_strcmp(args[0], "export") == 0)
-		ft_export(args, &(minishell->env_list));
+		ft_export(minishell, args);
 	else if (ft_strcmp(args[0], "unset") == 0)
-		ft_unset(args, &(minishell->env_list));
+		ft_unset(minishell, args);
 	else if (ft_strcmp(args[0], "env") == 0)
-		ft_env(&(minishell->env_list));
+		ft_env(minishell, args);
 }

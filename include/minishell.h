@@ -52,7 +52,7 @@ typedef struct s_mini
 {
 	char		**envp;
 	t_cmd		*cmd;
-	t_env		*env_list;
+	t_env		*env;
 	t_parser	*parser;
 }	t_mini;
 
@@ -72,6 +72,14 @@ void		exec_line(t_mini *minishell);
 void		exec_cmds(t_mini *minishell);
 void		exec_line(t_mini *minishell);
 void		exec_builtin(char **args, t_mini *minishell);
+
+int			ft_env(t_mini *minishell, char **exec);
+int			ft_export(t_mini *minishell, char **exec);
+int			ft_unset(t_mini *minishell, char **exec);
+void		add_env(t_mini *minishell, char *key, char *value);
+t_env		*get_env(t_mini *minishell, char *key);
+char		*get_env_name(char *arg);
+char		*get_env_value(char *arg);
 
 void		ft_error(char *str, int err, int code);
 void		write_err(char *str);

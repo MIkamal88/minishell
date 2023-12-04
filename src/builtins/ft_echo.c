@@ -19,25 +19,47 @@
 **	PARAMETERS
 **	#1. The complete exec list of parameters.
 **	RETURN VALUES
-**	0 for sucess, 1 for error.
+**	0 for success, 1 for error.
 */
+
+static int	check_echo_option(char *option)
+{
+	int	flag;
+	int	i;
+
+	flag = 0;
+	i = 2;
+	if (!ft_strncmp(option, "-n", i))
+	{
+		while (option[i] == 'n')
+			i++;
+		if (option[i])
+			flag = 0;
+		else
+			flag = 1;
+	}
+	return (flag);
+}
 
 int	ft_echo(char **exec)
 {
-	char	*flag;
-	int		i;
+	int	flag;
 
-	flag = NULL;
-	i = 1;
-	if (exec[i] && *exec[i] == '-')
-		flag = &exec[i++][1];
-	while (exec[i])
+	flag = 0;
+	exec++;
+	while (check_echo_option(*exec))
 	{
-		printf("%s", exec[i++]);
-		if (exec[i])
-			printf(" ");
+		flag = 1;
+		exec++;
 	}
-	if (ft_strncmp(flag, "n\0", 2))
-		printf("\n");
+	while (*exec)
+	{
+		ft_putstr_fd(*exec, STDOUT_FILENO);
+		if (*(exec + 1))
+			ft_putstr_fd(" ", STDOUT_FILENO);
+		exec++;
+	}
+	if (!flag)
+		ft_putstr_fd("\n", STDOUT_FILENO);
 	return (0);
 }

@@ -26,6 +26,12 @@ t_mini	*init_minishell(char **envp)
 	if (!minishell->parser)
 		ft_error(NULL, EXIT, 12);
 	minishell->cmd = NULL;
+	minishell->env = NULL;
+	while (*envp)
+	{
+		add_env(minishell, get_env_name(*envp), get_env_value(*envp));
+		envp++;
+	}
 	return (minishell);
 }
 
