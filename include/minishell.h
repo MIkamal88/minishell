@@ -67,6 +67,11 @@ void		open_terminal(t_mini *minishell);
 
 void		cmd_table(t_mini *minishell);
 void		cmd_list(t_mini *minishell);
+void		cmd_expansion(t_mini *minishell);
+char		*key_search(t_env *env, char *key);
+void		tilde_expansion(t_env *env, t_token **token, int *pos);
+void		quote_expansion(t_env *env, t_token **token, int *pos, char quote);
+void		variable_expansion(t_env *env, t_token **tkn, int *pos);
 
 void		exec_line(t_mini *minishell);
 void		exec_cmds(t_mini *minishell);

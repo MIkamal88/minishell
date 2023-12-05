@@ -27,54 +27,74 @@
 **	
 */
 
-// static void	token_expansion(t_token **token)
-// {
-// 	int	pos;
-//
-// 	pos = 0;
-// 	if ((*token)->tkn[pos] == '~')
-// 		tilde_expansion(token, &pos);
-// 	while ((*token)->tkn[pos])
-// 	{
-// 		if ((*token)->tkn[pos] == '$')
-// 			variable_expansion(token, &pos);
-// 		else if ((*token)->tkn[pos] == '\'' || (*token)->tkn[pos] == '\"')
-// 			quote_expansion(token, &pos, (*token)->tkn[pos]);
-// 		pos++;
-// 	}
-// }
-//
-// static void	expand_redirects(t_cmd *cmd)
-// {
-// 	t_token	*token;
-//
-// 	token = cmd->redirects;
-// 	while (token)
-// 	{
-// 		if (ft_strncmp(token->tkn, "<<", 3))
-// 		{
-// 			token = token->next;
-// 			token_expansion(&token);
-// 		}
-// 		else
-// 			token = token->next;
-// 		token = token->next;
-// 	}
-// }
-//
-// void	cmd_expansion(t_cmd *cmd)
-// {
-// 	t_token	*token;
-//
-// 	while (cmd)
-// 	{
-// 		token = cmd->commands;
-// 		while (token)
-// 		{
-// 			token_expansion(&token);
-// 			token = token->next;
-// 		}
-// 		expand_redirects(cmd);
-// 		cmd = cmd->next;
-// 	}
-// }
+char	*key_search(t_env *env, char *key)
+{
+	t_env	*ptr;
+	size_t	len;
+
+	ptr = env;
+	len = ft_strlen(key);
+	while (ptr)
+	{
+		if (ft_strlen(ptr->key) == len && ft_strncmp(key, ptr->key, len) == 0)
+			return (ptr->value);
+		ptr = ptr->next;
+	}
+	return (NULL);
+}
+
+static void	token_expansion(t_env *env, t_token **token)
+{
+	int	pos;
+
+	pos = 0;
+	if ((*token)->tkn[pos] == '~')
+		tilde_expansion(env, token, &pos);
+	while ((*token)->tkn[pos])
+	{
+		if ((*token)->tkn[pos] == '$')
+			variable_expansion(env, token, &pos);
+		else if ((*token)->tkn[pos] == '\'' || (*token)->tkn[pos] == '\"')
+			quote_expansion(env, token, &pos, (*token)->tkn[pos]);
+		pos++;
+	}
+}
+
+static void	expand_redirects(t_env *env, t_cmd *cmd)
+{
+	t_token	*token;
+
+	token = cmd->redirects;
+	while (token)
+	{
+		if (ft_strncmp(token->tkn, "<<", 3))
+		{
+			token = token->next;
+			token_expansion(env, &token);
+		}
+		else
+			token = token->next;
+		token = token->next;
+	}
+}
+
+void	cmd_expansion(t_mini *minishell)
+{
+	t_token	*token;
+	t_cmd	*cmd;
+	t_env	*env;
+
+	env = minishell->env;
+	cmd = minishell->cmd;
+	while (cmd)
+	{
+		token = cmd->commands;
+		while (token)
+		{
+			token_expansion(env, &token);
+			token = token->next;
+		}
+		expand_redirects(env, cmd);
+		cmd = cmd->next;
+	}
+}

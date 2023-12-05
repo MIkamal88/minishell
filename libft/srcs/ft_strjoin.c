@@ -14,33 +14,18 @@
 
 char	*ft_strjoin(char const *s1, char const *s2)
 {
-	size_t	i;
-	size_t	k;
-	char	*str;
+	char	*ccat;
+	int		len_s1;
+	int		len_s2;
 
-	i = 0;
-	k = 0;
-	if (!s1 || !s2)
+	if (!s1 && !s2)
 		return (NULL);
-	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (str == NULL)
+	len_s1 = (ft_strlen((char *)s1));
+	len_s2 = (ft_strlen((char *)s2));
+	ccat = (char *)malloc((len_s1 + len_s2 + 1) * sizeof(char));
+	if (ccat == NULL)
 		return (NULL);
-	while (i < ft_strlen(s1))
-	{
-		str[k++] = s1[i++];
-	}
-	i = 0;
-	while (i < ft_strlen(s2))
-	{
-		str[k++] = s2[i++];
-	}
-	str[k] = '\0';
-	return (str);
+	ft_strlcpy(&ccat[0], s1, len_s1 + 1);
+	ft_strlcpy(&ccat[len_s1], s2, len_s2 + 1);
+	return (ccat);
 }
-
-// int	main(void)
-// {
-// 	char	*s1 = "This is a ";
-// 	char	*s2 = "test phrase";
-// 	printf("%s\n", ft_strjoin(s1, s2));
-// }

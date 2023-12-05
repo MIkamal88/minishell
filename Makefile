@@ -1,8 +1,8 @@
 NAME	= minishell
 LIBFT	= libft.a
 
-CC	= gcc #-g
-CF	= -Wall -Wextra -Werror -fsanitize=address
+CC	= gcc -g
+CF	= -Wall -Wextra -Werror #-fsanitize=address
 CFI	= -I $(INCLUDE)
 CREADLINE	= -lreadline
 

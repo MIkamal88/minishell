@@ -50,7 +50,7 @@ void	cmd_add_back(t_cmd **cmd, t_cmd *last)
 	}
 }
 
-void	swap_token(t_token *token, char	*new_token)
+void	swap_token(t_token *token, char *new_token)
 {
 	free(token->tkn);
 	token->tkn = new_token;
