@@ -27,9 +27,9 @@
 
 void	exec_line(t_mini *minishell)
 {
-	// open_pipes();
-	// if (!define_redirects())
-	// 	return ;
+	open_pipes(minishell);
+	if (!define_redirects(minishell))
+		return ;
 	exec_cmds(minishell);
 }
 

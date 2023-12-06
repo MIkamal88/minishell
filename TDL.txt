@@ -1,0 +1,6 @@
+/bin/ls as a command does not work
+$? + $? returns wrong exit code
+ctrl + D in an empty prompt should quit minishell ->> Relaunch!
+ctrl + \ after running a blocking command like 'cat'
+echo $myname$asd (asd is non existant) --> FIXED
+check builtins for parameters

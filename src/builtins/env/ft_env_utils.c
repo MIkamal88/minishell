@@ -71,7 +71,7 @@ char	*get_env_value(char *arg)
 t_env	*get_env(t_mini *minishell, char *key)
 {
 	t_env	*ptr;
-	size_t	len;
+	int		len;
 
 	ptr = minishell->env;
 	len = ft_strlen(key);

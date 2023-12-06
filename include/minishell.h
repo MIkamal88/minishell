@@ -76,6 +76,8 @@ void		variable_expansion(t_env *env, t_token **tkn, int *pos);
 void		exec_line(t_mini *minishell);
 void		exec_cmds(t_mini *minishell);
 void		exec_line(t_mini *minishell);
+void		open_pipes(t_mini *minishell);
+int			define_redirects(t_mini *minishell);
 void		exec_builtin(char **args, t_mini *minishell);
 
 int			ft_env(t_mini *minishell, char **exec);

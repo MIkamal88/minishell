@@ -30,7 +30,7 @@
 char	*key_search(t_env *env, char *key)
 {
 	t_env	*ptr;
-	size_t	len;
+	int		len;
 
 	ptr = env;
 	len = ft_strlen(key);

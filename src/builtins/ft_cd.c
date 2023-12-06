@@ -30,10 +30,6 @@
  *	-
 */
 
-/*
-*	Need to check if $HOME and ~ are supposed to work in ft_cd or not.
-*/
-
 char	*get_pwd(void)
 {
 	char	*buffer;
@@ -62,7 +58,9 @@ void	ft_cd(char **exec)
 		return ;
 	else
 	{
-		if (chdir(exec[1]) != 0)
+		if (exec[1] && exec[2])
+			ft_error("cd", 14, 1);
+		else if (chdir(exec[1]) != 0)
 			ft_error(exec[1], 12, 1);
 	}
 }

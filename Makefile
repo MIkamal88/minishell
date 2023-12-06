@@ -36,6 +36,7 @@ SRC	= main.c\
 			exec_builtin.c\
 			exec_external.c\
 			exec_ex_utils.c\
+			pipes_redirects.c\
 			ft_cd.c\
 			ft_echo.c\
 			ft_env.c\
