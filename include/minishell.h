@@ -39,6 +39,7 @@ enum	e_mini_err
 	CMD_ARGS = 14,
 	CMD_MIA = 15,
 	EXPORT = 16,
+	NO_OPTN = 17,
 	SYNT_ERR_TOKEN = 21,
 	QUOTE_MIA = 22,
 	PERM_DENIED = 31,

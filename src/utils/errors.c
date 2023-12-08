@@ -86,6 +86,12 @@ static void	exec_err(char *str, int err)
 		write_err(str);
 		write_err("' : not a valid identifier\n");
 	}
+	if (err == 17)
+	{
+		write_err("Minishell: ");
+		write_err(str);
+		write_err(": Builtin has no options.\n");
+	}
 }
 
 void	ft_error(char *str, int err, int code)
@@ -97,7 +103,7 @@ void	ft_error(char *str, int err, int code)
 		exit(g_exit_code);
 	if (err >= 11 && err <= 12)
 		cd_err(str, err);
-	if (err >= 14 && err <= 16)
+	if (err >= 14 && err <= 17)
 		exec_err(str, err);
 	if (err >= 20 && err < 30)
 		syntax_err(str, err);

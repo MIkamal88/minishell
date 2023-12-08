@@ -27,16 +27,19 @@ int	ft_env(t_mini *minishell, char **exec)
 	ptr = minishell->env;
 	if (*(exec + 1))
 		ft_error("env", 14, 127);
-	while (ptr)
+	else
 	{
-		if (ptr->value)
+		while (ptr)
 		{
-			ft_putstr_fd(ptr->key, STDOUT_FILENO);
-			ft_putchar_fd('=', STDOUT_FILENO);
-			ft_putstr_fd(ptr->value, STDOUT_FILENO);
-			write(STDOUT_FILENO, "\n", 1);
+			if (ptr->value)
+			{
+				ft_putstr_fd(ptr->key, STDOUT_FILENO);
+				ft_putchar_fd('=', STDOUT_FILENO);
+				ft_putstr_fd(ptr->value, STDOUT_FILENO);
+				write(STDOUT_FILENO, "\n", 1);
+			}
+			ptr = ptr->next;
 		}
-		ptr = ptr->next;
 	}
 	return (0);
 }
