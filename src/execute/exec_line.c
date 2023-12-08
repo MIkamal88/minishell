@@ -39,6 +39,7 @@ void	exec_cmds(t_mini *minishell)
 	char	**args;
 
 	cmd = minishell->cmd;
+	cmd->envp = create_envp(minishell->env);
 	while (cmd)
 	{
 		args = cmd->exec;
@@ -47,7 +48,7 @@ void	exec_cmds(t_mini *minishell)
 			if (is_builtin(args[0]))
 				exec_builtin(args, minishell);
 			else
-				exec_external_cmd(args, minishell->envp);
+				exec_external_cmd(args, cmd->envp);
 		}
 		cmd = cmd->next;
 	}

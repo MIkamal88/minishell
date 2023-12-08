@@ -36,19 +36,29 @@ int	execute_command(char **args, char **envp, char **directories)
 {
 	char	*executable;
 
-	executable = search_executable_in_directories(directories, args[0]);
-	if (executable != NULL)
+	if (args[0][0] == '/')
 	{
-		execve(executable, args, envp);
-		printf("Exec failed\n");
-		free(executable);
-		return (1);
+		executable = ft_strdup(args[0]);
+		if (access(executable, X_OK) != 0)
+		{
+			free(executable);
+			ft_error(args[0], 15, 127);
+			return (0);
+		}
 	}
 	else
 	{
-		ft_error(args[0], 15, 127);
-		return (0);
+		executable = search_executable_in_directories(directories, args[0]);
+		if (executable == NULL)
+		{
+			ft_error(args[0], 15, 127);
+			return (0);
+		}
 	}
+	execve(executable, args, envp);
+	printf("Exec failed\n");
+	free(executable);
+	return (1);
 }
 
 void	child_process(char **args, char **envp)
@@ -58,10 +68,10 @@ void	child_process(char **args, char **envp)
 
 	directories = get_directories_from_path();
 	if (directories == NULL)
-		exit(1);
+		ft_error(NULL, EXIT, 12);
 	result = execute_command(args, envp, directories);
 	if (result == 0)
-		exit(1);
+		exit(1);//need to find error code here
 	else
 		exit(0);
 }

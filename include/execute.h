@@ -29,6 +29,7 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
+char	**create_envp(t_env *env);
 t_bool	check_params(char *argv);
 t_bool	is_valid_key(char *key);
 int		is_forked(t_cmd *cmd);

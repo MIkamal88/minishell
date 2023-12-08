@@ -28,6 +28,7 @@ SRC	= main.c\
 			cmd_list.c\
 			cmd_table.c\
 			cmd_utils.c\
+			envp.c\
 			cmd_expansion.c\
 			quote_expansion.c\
 			tilde_expansion.c\
