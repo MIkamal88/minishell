@@ -6,7 +6,7 @@
 /*   By: anayef <anayef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 18:52:15 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/11/27 21:13:19 by anayef           ###   ########.fr       */
+/*   Updated: 2023/12/08 21:11:26 by anayef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,7 @@ void		variable_expansion(t_env *env, t_token **tkn, int *pos);
 void		exec_line(t_mini *minishell);
 void		exec_cmds(t_mini *minishell);
 void		exec_line(t_mini *minishell);
-void		open_pipes(t_mini *minishell);
+void		setup_envp_pipes(t_mini *minishell);
 int			define_redirects(t_mini *minishell);
 void		exec_builtin(char **args, t_mini *minishell);
 
@@ -101,5 +101,6 @@ char		*ft_strnjoin(int argn, ...);
 void		free_arr(void **split_arr);
 
 int			ft_exit(char **exec, t_mini *minishell);
+void		execute_with_pipe(t_cmd *cmd, int in_fd, int out_fd, t_mini *ms);
 
 #endif

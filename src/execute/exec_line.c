@@ -6,7 +6,7 @@
 /*   By: anayef <anayef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/08 11:38:02 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/11/29 21:13:17 by anayef           ###   ########.fr       */
+/*   Updated: 2023/12/08 22:01:14 by anayef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,31 +25,44 @@
 **	-
 */
 
-void	exec_line(t_mini *minishell)
+void	execute_with_pipes(t_mini *minishell, t_cmd *cmd, int prev_pipe[])
 {
-	open_pipes(minishell);
-	if (!define_redirects(minishell))
-		return ;
-	exec_cmds(minishell);
+	if (cmd->endpoint == PIPE)
+	{
+		if (pipe(cmd->fd_pipe) == -1)
+		{
+			perror("Pipe creation failed");
+			exit(EXIT_FAILURE);
+		}
+		execute_with_pipe(cmd, prev_pipe[0], cmd->fd_pipe[1], minishell);
+		close(cmd->fd_pipe[1]);
+		prev_pipe[0] = cmd->fd_pipe[0];
+		prev_pipe[1] = cmd->fd_pipe[1];
+		cmd->fd_in = prev_pipe[0];
+	}
+	else
+		execute_with_pipe(cmd, prev_pipe[0], cmd->fd_out, minishell);
 }
 
 void	exec_cmds(t_mini *minishell)
 {
 	t_cmd	*cmd;
-	char	**args;
+	int		prev_pipe[2];
 
 	cmd = minishell->cmd;
-	cmd->envp = create_envp(minishell->env);
 	while (cmd)
 	{
-		args = cmd->exec;
-		if (args != NULL)
-		{
-			if (is_builtin(args[0]))
-				exec_builtin(args, minishell);
-			else
-				exec_external_cmd(args, cmd->envp);
-		}
+		execute_with_pipes(minishell, cmd, prev_pipe);
 		cmd = cmd->next;
 	}
+	if (prev_pipe[0] != 0)
+		close(prev_pipe[0]);
+}
+
+void	exec_line(t_mini *minishell)
+{
+	setup_envp_pipes(minishell);
+	if (!define_redirects(minishell))
+		return ;
+	exec_cmds(minishell);
 }

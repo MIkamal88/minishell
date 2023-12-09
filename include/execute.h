@@ -6,7 +6,7 @@
 /*   By: anayef <anayef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/30 07:33:54 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/11/27 21:57:04 by anayef           ###   ########.fr       */
+/*   Updated: 2023/12/08 19:56:51 by anayef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,12 +56,13 @@ void	free_env_list(t_env *env_list);
 
 void	exec_builtin_in_child(t_cmd *cmd);
 void	exec_builtin_in_parent(t_cmd *cmd);
+void	close_fd(int fd);
 
 void	change_exec(t_cmd *cmd, int pos);
 void	assign_word(t_cmd *cmd);
 
 void	close_fds(t_cmd *cmd);
-void	close_fd(t_cmd *cmd, int flag);
+// void	close_fd(t_cmd *cmd, int flag);
 
 char	*get_path(t_cmd *cmd);
 void	exec_commands_child_signals(void);

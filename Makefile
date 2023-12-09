@@ -34,6 +34,7 @@ SRC	= main.c\
 			tilde_expansion.c\
 			variable_expansion.c\
 			exec_line.c\
+			exec_with_pipe.c\
 			exec_builtin.c\
 			exec_external.c\
 			exec_ex_utils.c\
