@@ -54,3 +54,12 @@ char	**create_envp(t_env *env)
 	}
 	return (envp);
 }
+
+void	envp_swap(t_mini *minishell)
+{
+	t_cmd	*ptr;
+
+	ptr = minishell->cmd;
+	free_arr((void **)ptr->envp);
+	ptr->envp = create_envp(minishell->env);
+}

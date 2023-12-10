@@ -34,11 +34,12 @@ SRC	= main.c\
 			tilde_expansion.c\
 			variable_expansion.c\
 			exec_line.c\
-			exec_with_pipe.c\
+			exec_pipe_block.c\
+			fetch_path.c\
 			exec_builtin.c\
-			exec_external.c\
-			exec_ex_utils.c\
 			pipes_redirects.c\
+			close_fds.c\
+			cmd_sigs.c\
 			ft_cd.c\
 			ft_echo.c\
 			ft_env.c\

@@ -66,7 +66,7 @@ void	cmd_table(t_mini *minishell)
 	id = 0;
 	while (list)
 	{
-		cmd_node = cmd_create(minishell->envp, id);
+		cmd_node = cmd_create(id);
 		cmd_populate(&cmd_node, &list, &prev);
 		cmd_add_back(&minishell->cmd, cmd_node);
 		id++;

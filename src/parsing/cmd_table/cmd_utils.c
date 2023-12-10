@@ -12,7 +12,7 @@
 
 #include "../../../include/minishell.h"
 
-t_cmd	*cmd_create(char **envp, int id)
+t_cmd	*cmd_create(int id)
 {
 	t_cmd	*cmd;
 
@@ -26,7 +26,7 @@ t_cmd	*cmd_create(char **envp, int id)
 	cmd->is_piped = FALSE;
 	cmd->exec = NULL;
 	cmd->exec_path = NULL;
-	cmd->envp = envp;
+	cmd->envp = NULL;
 	cmd->fd_in = -2;
 	cmd->fd_out = -2;
 	cmd->errnb = 0;

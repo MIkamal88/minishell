@@ -26,7 +26,8 @@
 # include "../libft/includes/libft.h"
 # include "./colors.h"
 # include "./parser.h"
-# include "./execute.h"
+
+# define MAX_PID	1024
 
 enum	e_mini_err
 {
@@ -49,9 +50,21 @@ enum	e_mini_err
 	NEW_L = 35,
 };
 
+enum e_fd{
+	IN,
+	OUT,
+	BOTH,
+};
+
+typedef struct s_env
+{
+	char			*key;
+	char			*value;
+	struct s_env	*next;
+}	t_env;
+
 typedef struct s_mini
 {
-	char		**envp;
 	t_cmd		*cmd;
 	t_env		*env;
 	t_parser	*parser;
@@ -59,48 +72,77 @@ typedef struct s_mini
 
 extern int	g_exit_code;
 
+// Initialization
 t_mini		*init_minishell(char **envp);
 t_parser	*init_parser(void);
-
 char		*create_prompt(void);
 void		run_signals(void);
 void		open_terminal(t_mini *minishell);
 
+// Command Table
 void		cmd_table(t_mini *minishell);
 void		cmd_list(t_mini *minishell);
 void		cmd_expansion(t_mini *minishell);
+t_cmd		*cmd_create(int id);
+void		cmd_add_back(t_cmd **cmd, t_cmd *last);
+
+// ENV Struct
+char		**create_envp(t_env *env);
+t_env		*get_env(t_mini *minishell, char *key);
+char		*get_env_name(char *arg);
+char		*get_env_value(char *arg);
+t_bool		check_params(char *argv);
+t_bool		is_valid_key(char *key);
 char		*key_search(t_env *env, char *key);
 void		tilde_expansion(t_env *env, t_token **token, int *pos);
 void		quote_expansion(t_env *env, t_token **token, int *pos, char quote);
 void		variable_expansion(t_env *env, t_token **tkn, int *pos);
+t_env		*create_env_node(const char *variable, const char *value);
+void		add_env_variable(t_env **env_list, \
+	const char *variable, const char *value);
+void		free_env_list(t_env *env_list);
 
+// Execution
 void		exec_line(t_mini *minishell);
 void		exec_cmds(t_mini *minishell);
-void		exec_line(t_mini *minishell);
-void		setup_envp_pipes(t_mini *minishell);
+void		setup_pipes(t_mini *minishell);
 int			define_redirects(t_mini *minishell);
 void		exec_builtin(char **args, t_mini *minishell);
+void		exec_pipe_block(t_mini *minishell);
+int			is_forked(t_mini *minishell);
+void		exec_builtin_child(t_mini *minishell);
+void		exec_builtin_parent(t_mini *minishell);
+void		close_fd(t_cmd *cmd, int flag);
+void		close_fds(t_cmd *cmd);
+void		wait_all(int pid[MAX_PID], int id);
+char		*fetch_path(t_cmd *cmd, t_env *env);
+void		exec_cmd_child_sig(void);
+void		exec_cmd_parent_sig(void);
 
+// Builtins
 int			ft_env(t_mini *minishell, char **exec);
 int			ft_export(t_mini *minishell, char **exec);
 int			ft_unset(t_mini *minishell, char **exec);
 void		add_env(t_mini *minishell, char *key, char *value);
-t_env		*get_env(t_mini *minishell, char *key);
-char		*get_env_name(char *arg);
-char		*get_env_value(char *arg);
+int			ft_exit(char **exec, t_mini *minishell);
+char		*get_pwd(void);
+void		ft_pwd(void);
+void		ft_cd(char **exec);
+int			ft_echo(char **args);
+int			is_builtin(char *command);
 
+// Exit
 void		ft_error(char *str, int err, int code);
 void		write_err(char *str);
 void		exit_errno(char *errfile, int errnb);
 void		clear(t_mini *minishell);
 void		clear_parser(t_mini *minishell);
 void		clear_cmd(t_mini *minishell);
+void		exit_minishell(t_mini *minishell, int ret);
 
+// Utils
 char		**ft_arrdup(char **arr);
 char		*ft_strnjoin(int argn, ...);
 void		free_arr(void **split_arr);
-
-int			ft_exit(char **exec, t_mini *minishell);
-void		execute_with_pipe(t_cmd *cmd, int in_fd, int out_fd, t_mini *ms);
 
 #endif

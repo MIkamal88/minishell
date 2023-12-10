@@ -30,6 +30,9 @@ typedef enum s_lex
 	PIPE,
 }	t_lex;
 
+# define METACHAR	"|<>&()"
+# define METACHARS	"|<>&() "
+
 typedef struct s_token
 {
 	int				lexema;
@@ -61,16 +64,14 @@ typedef struct s_parser
 	t_token	*tokens;
 }	t_parser;
 
-# define METACHAR	"|<>&()"
-# define METACHARS	"|<>&() "
-
+// Syntax Analysis
 int			lexical_analysis(char *token);
 t_bool		syntax_analysis(t_parser *parser);
-int			is_assign_word(char *token);
 t_bool		syntax_pipe(t_token *token, int pos);
 t_bool		syntax_redirect_io(t_token *token);
 t_bool		syntax_quote(t_token *token);
 
+// Tokenization
 t_token		*create_token(char *tkn, int flag);
 void		tokenize_input(t_parser *parser);
 t_bool		is_new_token(const char *input, int index, int prev);
@@ -78,8 +79,5 @@ t_token		*tkn_dup(t_token *original);
 int			tkn_len(t_token *token);
 void		token_add_back(t_token **list, t_token *token);
 void		swap_token(t_token *token, char	*new_token);
-
-t_cmd		*cmd_create(char **envp, int id);
-void		cmd_add_back(t_cmd **cmd, t_cmd *last);
 
 #endif

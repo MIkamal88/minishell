@@ -12,20 +12,55 @@
 
 #include "../../include/minishell.h"
 
-void	exec_builtin(char **args, t_mini *minishell)
+void	exec_builtin_parent(t_mini *minishell)
 {
-	if (ft_strcmp(args[0], "echo") == 0)
-		ft_echo(args);
-	else if (ft_strcmp(args[0], "pwd") == 0)
+	t_cmd	*ptr;
+
+	ptr = minishell->cmd;
+	if (!ft_strncmp(ptr->exec_path, "cd\0", 3))
+		ft_cd(ptr->exec);
+	else if (!ft_strncmp(ptr->exec_path, "export\0", 7))
+		ft_export(minishell, ptr->exec);
+	else if (!ft_strncmp(ptr->exec_path, "unset\0", 6))
+		ft_unset(minishell, ptr->exec);
+	else if (!ft_strncmp(ptr->exec_path, "exit\0", 5))
+		ft_exit(ptr->exec, minishell);
+}
+
+void	exec_builtin_child(t_mini *minishell)
+{
+	t_cmd	*ptr;
+
+	ptr = minishell->cmd;
+	if (!ft_strncmp(ptr->exec_path, "env\0", 4))
+		ft_env(minishell, ptr->exec);
+	else if (!ft_strncmp(ptr->exec_path, "export\0", 7))
+		ft_export(minishell, ptr->exec);
+	else if (!ft_strncmp(ptr->exec_path, "echo\0", 5))
+		ft_echo(ptr->exec);
+	else if (!ft_strncmp(ptr->exec_path, "pwd\0", 4))
 		ft_pwd();
-	else if (ft_strcmp(args[0], "cd") == 0)
-		ft_cd(args);
-	else if (ft_strcmp(args[0], "exit") == 0)
-		ft_exit(args, minishell);
-	else if (ft_strcmp(args[0], "export") == 0)
-		ft_export(minishell, args);
-	else if (ft_strcmp(args[0], "unset") == 0)
-		ft_unset(minishell, args);
-	else if (ft_strcmp(args[0], "env") == 0)
-		ft_env(minishell, args);
+}
+
+int	is_forked(t_mini *minishell)
+{
+	t_cmd	*ptr;
+
+	ptr = minishell->cmd;
+	if (!ft_strncmp(ptr->exec_path, "cd\0", 3)
+		|| !ft_strncmp(ptr->exec_path, "unset\0", 6)
+		|| !ft_strncmp(ptr->exec_path, "exit\0", 5))
+	{
+		if (!ptr->is_piped)
+			exec_builtin_parent(minishell);
+		return (0);
+	}
+	else if (!ft_strncmp(ptr->exec_path, "export\0", 7)
+		&& ptr->exec[1] && *ptr->exec[1])
+	{
+		if (!ptr->is_piped)
+			exec_builtin_parent(minishell);
+		return (0);
+	}
+	return (1);
 }

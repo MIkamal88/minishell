@@ -40,7 +40,8 @@ void	clear_cmd(t_mini *minishell)
 		curr = curr->next;
 		clear_tokens(&tmp->commands);
 		clear_tokens(&tmp->redirects);
-		free_arr((void **)tmp->envp);
+		if (tmp->envp)
+			free_arr((void **)tmp->envp);
 		if (tmp->exec)
 			free_arr((void **)tmp->exec);
 		if (tmp->exec_path)
@@ -83,8 +84,6 @@ void	clear(t_mini *minishell)
 {
 	if (minishell->env)
 		clear_env(minishell);
-	if (minishell->envp)
-		free_arr((void **)minishell->envp);
 	if (minishell->parser)
 		clear_parser(minishell);
 	if (minishell->cmd)

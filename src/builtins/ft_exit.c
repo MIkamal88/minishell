@@ -60,7 +60,6 @@ int	ft_exit(char **exec, t_mini *minishell)
 		write_err(exec[1]);
 		write_err(": numeric argument required\n");
 	}
-	clear(minishell);
-	ft_error("exit\n", EXIT_CMD, ret);
+	exit_minishell(minishell, ret);
 	return (0);
 }

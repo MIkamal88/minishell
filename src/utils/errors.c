@@ -99,7 +99,7 @@ void	ft_error(char *str, int err, int code)
 	g_exit_code = code;
 	if (err >= 0 && err < 10)
 		write_err(str);
-	if (err >= 0 && err < 10)
+	if (err >= 0 && err < 10 && err != 2)
 		exit(g_exit_code);
 	if (err >= 11 && err <= 12)
 		cd_err(str, err);

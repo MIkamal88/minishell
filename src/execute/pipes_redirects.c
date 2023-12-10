@@ -13,7 +13,7 @@
 #include "../../include/minishell.h"
 
 /*	setup_envp_pipes
- *	----------
+ *	----------------
  *	DESCRIPTION
  *	This function creates envp array inside each cmd.
  *	And opens all nessecary pipes by the defined
@@ -24,14 +24,13 @@
  *	-
  */
 
-void	setup_envp_pipes(t_mini *minishell)
+void	setup_pipes(t_mini *minishell)
 {
 	t_cmd	*cmd;
 
 	cmd = minishell->cmd;
 	while (cmd)
 	{
-		cmd->envp = create_envp(minishell->env);
 		if (cmd->endpoint == PIPE)
 		{
 			if (pipe(cmd->fd_pipe) == -1)
@@ -43,12 +42,6 @@ void	setup_envp_pipes(t_mini *minishell)
 		}
 		cmd = cmd->next;
 	}
-}
-
-void	close_fd(int fd)
-{
-	if (fd != 0 && fd != 1)
-		close(fd);
 }
 
 static void	get_fileno(int operator, char *filename, t_cmd *cmd)

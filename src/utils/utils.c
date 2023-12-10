@@ -31,6 +31,13 @@ void	exit_errno(char *errfile, int errnb)
 		ft_error(errfile, 15, 127);
 }
 
+void	exit_minishell(t_mini *minishell, int ret)
+{
+	ft_error("exit", EXIT_CMD, ret);
+	clear(minishell);
+	exit(g_exit_code);
+}
+
 void	free_arr(void **split_arr)
 {
 	int	i;

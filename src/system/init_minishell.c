@@ -19,9 +19,6 @@ t_mini	*init_minishell(char **envp)
 	minishell = malloc(sizeof(t_mini));
 	if (!minishell)
 		ft_error(NULL, EXIT, 12);
-	minishell->envp = ft_arrdup(envp);
-	if (!minishell->envp)
-		ft_error(NULL, EXIT, 12);
 	minishell->parser = init_parser();
 	if (!minishell->parser)
 		ft_error(NULL, EXIT, 12);
