@@ -20,49 +20,77 @@
  *	#1. Complete exec list of parameters
  *	RETURN VALUES
  *	-
- *	FT_PWD
- *	------
- *	DESCRIPTION
- *	Prints Current Directory
- *	PARAMETERS
- *	-
- *	RETURN
- *	-
 */
 
-char	*get_pwd(void)
+static char	**create_export_exec(char *pwd, char *oldpwd)
 {
-	char	*buffer;
+	char	**exec;
+	char	*name;
 
-	buffer = NULL;
-	return (getcwd(buffer, 0));
+	exec = ft_calloc(4, sizeof(char *));
+	if (!exec)
+		ft_error(NULL, EXIT, 12);
+	name = ft_strdup("export");
+	exec[0] = name;
+	exec[1] = pwd;
+	exec[2] = oldpwd;
+	return (exec);
 }
 
-void	ft_pwd(void)
+static int	cd_cmd(t_mini *minishell, char *path)
 {
-	char	*cwd;
+	char	*oldpwd;
+	char	*pwd;
+	char	*curr_pwd;
+	char	**exec;
 
-	cwd = getcwd(NULL, 0);
-	if (cwd != NULL)
+	if (chdir(path) == -1)
 	{
-		printf("%s\n", cwd);
-		free(cwd);
+		ft_error(path, 12, 1);
+		return (1);
 	}
-	else
-		return ;
+	oldpwd = ft_strjoin("OLDPWD=", key_search(minishell->env, "PWD"));
+	curr_pwd = get_pwd();
+	pwd = ft_strjoin("PWD=", curr_pwd);
+	free(curr_pwd);
+	exec = create_export_exec(pwd, oldpwd);
+	ft_export(minishell, exec);
+	free_arr((void **)exec);
+	return (0);
 }
 
-void	ft_cd(char **exec)
+static int	cd_variable(t_mini *minishell, char *variable)
 {
-	if (exec[1] == NULL)
-		return ;
+	char	*path;
+	int		ret;
+
+	path = key_search(minishell->env, variable);
+	ret = 1;
+	if (!path || !*path)
+		ft_error(variable, 11, 1);
 	else
 	{
-		if (exec[1] && exec[2])
-			ft_error("cd", 14, 1);
-		else if (check_params(exec[1]))
-			ft_error(*exec, 17, 1);
-		else if (chdir(exec[1]) != 0)
-			ft_error(exec[1], 12, 1);
+		if (!ft_strncmp("OLDPWD", variable, 6))
+			printf("%s\n", path);
+		ret = cd_cmd(minishell, path);
 	}
+	return (ret);
+}
+
+int	ft_cd(t_mini *minishell, char **exec)
+{
+	char	*parameter;
+	int		ret;	
+
+	parameter = exec[1];
+	ret = 1;
+	if (parameter && exec[2])
+		ft_error("cd", 14, 1);
+	else if (!parameter || !*parameter)
+		ret = cd_variable(minishell, "HOME");
+	else if (!ft_strncmp(parameter, "-", 2))
+		ret = cd_variable(minishell, "OLDPWD");
+	else
+		ret = cd_cmd(minishell, parameter);
+	return (ret);
 }

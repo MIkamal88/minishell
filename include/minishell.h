@@ -126,8 +126,8 @@ int			ft_unset(t_mini *minishell, char **exec);
 void		add_env(t_mini *minishell, char *key, char *value);
 int			ft_exit(char **exec, t_mini *minishell);
 char		*get_pwd(void);
-void		ft_pwd(void);
-void		ft_cd(char **exec);
+int			ft_pwd(void);
+int			ft_cd(t_mini *minishell, char **exec);
 int			ft_echo(char **args);
 int			is_builtin(char *command);
 

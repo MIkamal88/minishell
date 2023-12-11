@@ -40,6 +40,7 @@ SRC	= main.c\
 			pipes_redirects.c\
 			close_fds.c\
 			cmd_sigs.c\
+			ft_pwd.c\
 			ft_cd.c\
 			ft_echo.c\
 			ft_env.c\

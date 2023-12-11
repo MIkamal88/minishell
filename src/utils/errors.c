@@ -46,7 +46,7 @@ static void	redirect_err(char *str, int err)
 	{
 		write_err("Minishell: ");
 		write_err(str);
-		write_err(": Permission denied");
+		write_err(": Permission denied\n");
 	}
 	if (err == 32)
 	{

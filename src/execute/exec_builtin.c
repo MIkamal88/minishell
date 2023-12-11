@@ -18,13 +18,13 @@ void	exec_builtin_parent(t_mini *minishell)
 
 	ptr = minishell->cmd;
 	if (!ft_strncmp(ptr->exec_path, "cd\0", 3))
-		ft_cd(ptr->exec);
+		g_exit_code = ft_cd(minishell, ptr->exec);
 	else if (!ft_strncmp(ptr->exec_path, "export\0", 7))
-		ft_export(minishell, ptr->exec);
+		g_exit_code = ft_export(minishell, ptr->exec);
 	else if (!ft_strncmp(ptr->exec_path, "unset\0", 6))
-		ft_unset(minishell, ptr->exec);
+		g_exit_code = ft_unset(minishell, ptr->exec);
 	else if (!ft_strncmp(ptr->exec_path, "exit\0", 5))
-		ft_exit(ptr->exec, minishell);
+		g_exit_code = ft_exit(ptr->exec, minishell);
 }
 
 void	exec_builtin_child(t_mini *minishell)
@@ -33,13 +33,13 @@ void	exec_builtin_child(t_mini *minishell)
 
 	ptr = minishell->cmd;
 	if (!ft_strncmp(ptr->exec_path, "env\0", 4))
-		ft_env(minishell, ptr->exec);
+		g_exit_code = ft_env(minishell, ptr->exec);
 	else if (!ft_strncmp(ptr->exec_path, "export\0", 7))
-		ft_export(minishell, ptr->exec);
+		g_exit_code = ft_export(minishell, ptr->exec);
 	else if (!ft_strncmp(ptr->exec_path, "echo\0", 5))
-		ft_echo(ptr->exec);
+		g_exit_code = ft_echo(ptr->exec);
 	else if (!ft_strncmp(ptr->exec_path, "pwd\0", 4))
-		ft_pwd();
+		g_exit_code = ft_pwd();
 }
 
 int	is_forked(t_mini *minishell)

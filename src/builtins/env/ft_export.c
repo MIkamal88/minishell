@@ -19,15 +19,15 @@ static void	env_quotes(t_mini *minishell)
 	ptr = minishell->env;
 	while (ptr)
 	{
-		ft_putstr_fd("declare -x ", STDOUT_FILENO);
-		ft_putstr_fd(ptr->key, STDOUT_FILENO);
+		ft_putstr_fd("declare -x ", 1);
+		ft_putstr_fd(ptr->key, 1);
 		if (ptr->value)
 		{
-			write(STDOUT_FILENO, "=\"", 2);
-			ft_putstr_fd(ptr->value, STDOUT_FILENO);
-			write(STDOUT_FILENO, "\"", 1);
+			write(1, "=\"", 2);
+			ft_putstr_fd(ptr->value, 1);
+			write(1, "\"", 1);
 		}
-		write(STDOUT_FILENO, "\n", 1);
+		write(1, "\n", 1);
 		ptr = ptr->next;
 	}
 }
@@ -58,7 +58,7 @@ static void	exec_export(t_mini *minishell, char *exec)
 
 int	ft_export(t_mini *minishell, char **exec)
 {
-	if (!exec[1])
+	if (!exec[1] || !*exec[1])
 	{
 		env_quotes(minishell);
 		return (0);
