@@ -28,12 +28,12 @@ static void	clear_tokens(t_token **tokens)
 	*tokens = NULL ;
 }
 
-void	clear_cmd(t_mini *minishell)
+void	clear_cmd(t_cmd **cmd)
 {
 	t_cmd	*curr;
 	t_cmd	*tmp;
 
-	curr = minishell->cmd;
+	curr = *cmd;
 	while (curr)
 	{
 		tmp = curr;
@@ -48,7 +48,7 @@ void	clear_cmd(t_mini *minishell)
 			free(tmp->exec_path);
 		free(tmp);
 	}
-	minishell->cmd = NULL;
+	*cmd = NULL;
 }
 
 void	clear_parser(t_mini *minishell)
@@ -86,8 +86,7 @@ void	clear(t_mini *minishell)
 		clear_env(minishell);
 	if (minishell->parser)
 		clear_parser(minishell);
-	if (minishell->cmd)
-		clear_cmd(minishell);
+	clear_cmd(&minishell->cmd);
 	rl_clear_history();
 	free(minishell);
 }

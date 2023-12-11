@@ -47,7 +47,7 @@ void	open_terminal(t_mini *minishell)
 		if (minishell->parser)
 			clear_parser(minishell);
 		if (minishell->cmd)
-			clear_cmd(minishell);
+			clear_cmd(&minishell->cmd);
 		read_line(minishell);
 		if (!parse_line(minishell))
 			continue ;

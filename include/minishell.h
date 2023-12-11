@@ -114,7 +114,6 @@ void		exec_builtin_child(t_mini *minishell);
 void		exec_builtin_parent(t_mini *minishell);
 void		close_fd(t_cmd *cmd, int flag);
 void		close_fds(t_cmd *cmd);
-void		wait_all(int pid[MAX_PID], int id);
 char		*fetch_path(t_cmd *cmd, t_env *env);
 void		exec_cmd_child_sig(void);
 void		exec_cmd_parent_sig(void);
@@ -137,7 +136,7 @@ void		write_err(char *str);
 void		exit_errno(char *errfile, int errnb);
 void		clear(t_mini *minishell);
 void		clear_parser(t_mini *minishell);
-void		clear_cmd(t_mini *minishell);
+void		clear_cmd(t_cmd **cmd);
 void		exit_minishell(t_mini *minishell, int ret);
 
 // Utils

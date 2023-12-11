@@ -21,7 +21,7 @@ static void	dup2_close_fds(t_cmd *cmd)
 	close_fds(cmd);
 }
 
-void	exec_child(t_mini *minishell)
+static void	exec_child(t_mini *minishell)
 {
 	t_cmd	*ptr;
 
@@ -37,6 +37,22 @@ void	exec_child(t_mini *minishell)
 	}
 	clear(minishell);
 	ft_error("", EXIT, g_exit_code);
+}
+
+static void	wait_all(int pid[MAX_PID], int id)
+{
+	int		max_id;
+	int		wstatus;
+
+	if (id == -1)
+		return ;
+	max_id = id;
+	id = -1;
+	wstatus = 0;
+	while (++id <= max_id)
+		waitpid(pid[id], &wstatus, 0);
+	if (WIFEXITED(wstatus))
+		g_exit_code = WEXITSTATUS(wstatus);
 }
 
 void	exec_pipe_block(t_mini *minishell)
@@ -66,20 +82,4 @@ void	exec_pipe_block(t_mini *minishell)
 		*ptr = (*ptr)->next;
 	}
 	wait_all(pid, id);
-}
-
-void	wait_all(int pid[MAX_PID], int id)
-{
-	int		max_id;
-	int		wstatus;
-
-	if (id == -1)
-		return ;
-	max_id = id;
-	id = -1;
-	wstatus = 0;
-	while (++id <= max_id)
-		waitpid(pid[id], &wstatus, 0);
-	if (WIFEXITED(wstatus))
-		g_exit_code = WEXITSTATUS(wstatus);
 }
