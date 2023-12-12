@@ -35,6 +35,7 @@ SRC	= main.c\
 			variable_expansion.c\
 			exec_line.c\
 			exec_pipe_block.c\
+			exec_utils.c\
 			fetch_path.c\
 			exec_builtin.c\
 			pipes_redirects.c\
