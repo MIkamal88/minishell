@@ -27,14 +27,17 @@
 
 void	exec_cmds(t_mini *minishell)
 {
-	t_cmd	*cmd;
+	t_cmd	*curr;
+	t_cmd	*tmp;
 
-	cmd = minishell->cmd;
-	while (cmd)
+	curr = minishell->cmd;
+	tmp = curr;
+	while (curr)
 	{
 		exec_pipe_block(minishell);
-		cmd = cmd->next;
+		curr = curr->next;
 	}
+	clear_cmd(&tmp);
 }
 
 void	exec_line(t_mini *minishell)

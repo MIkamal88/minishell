@@ -32,7 +32,7 @@ static void	env_quotes(t_mini *minishell)
 	}
 }
 
-static void	exec_export(t_mini *minishell, char *exec)
+void	exec_export(t_mini *minishell, char *exec)
 {
 	char	*name;
 	char	*value;

@@ -86,7 +86,8 @@ void	clear(t_mini *minishell)
 		clear_env(minishell);
 	if (minishell->parser)
 		clear_parser(minishell);
-	clear_cmd(&minishell->cmd);
+	if (minishell->cmd)
+		clear_cmd(&minishell->cmd);
 	rl_clear_history();
 	free(minishell);
 }

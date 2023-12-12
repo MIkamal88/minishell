@@ -39,7 +39,7 @@ t_bool	syntax_analysis(t_parser *parser)
 	syntax_word_assignment(parser);
 	while (token)
 	{
-		if (!syntax_pipe(parser->tokens, pos))
+		if (!syntax_pipe(token, pos))
 			return (FALSE);
 		if (!syntax_redirect_io(token))
 			return (FALSE);

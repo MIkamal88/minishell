@@ -100,16 +100,20 @@ void		variable_expansion(t_env *env, t_token **tkn, int *pos);
 t_env		*create_env_node(const char *variable, const char *value);
 void		add_env_variable(t_env **env_list, \
 	const char *variable, const char *value);
-void		free_env_list(t_env *env_list);
+void		exec_export(t_mini *minishell, char *exec);
+void		envp_swap(t_mini *minishell, t_cmd *cmd);
 
 // Execution
 void		exec_line(t_mini *minishell);
 void		exec_cmds(t_mini *minishell);
+void		exec_cmd(t_mini *minishell);
 void		setup_pipes(t_mini *minishell);
 int			define_redirects(t_mini *minishell);
 void		exec_builtin(char **args, t_mini *minishell);
 void		exec_pipe_block(t_mini *minishell);
-int			is_forked(t_mini *minishell);
+void		exec_cmd(t_mini *minishell);
+t_bool		is_forked(t_mini *minishell);
+void		assign_word(t_mini *minishell);
 void		exec_builtin_child(t_mini *minishell);
 void		exec_builtin_parent(t_mini *minishell);
 void		close_fd(t_cmd *cmd, int flag);
@@ -128,6 +132,7 @@ char		*get_pwd(void);
 int			ft_pwd(void);
 int			ft_cd(t_mini *minishell, char **exec);
 int			ft_echo(char **args);
+void		assign_word(t_mini *minishell);
 int			is_builtin(char *command);
 
 // Exit
@@ -137,6 +142,7 @@ void		exit_errno(char *errfile, int errnb);
 void		clear(t_mini *minishell);
 void		clear_parser(t_mini *minishell);
 void		clear_cmd(t_cmd **cmd);
+void		clear_env(t_mini *minishell);
 void		exit_minishell(t_mini *minishell, int ret);
 
 // Utils

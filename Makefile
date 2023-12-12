@@ -49,6 +49,7 @@ SRC	= main.c\
 			ft_env_utils.c\
 			ft_unset.c\
 			is_builtin.c\
+			builtin_utils.c\
 			check_params.c\
 
 VPATH	:= $(SRC_PATH)\

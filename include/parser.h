@@ -67,6 +67,7 @@ typedef struct s_parser
 // Syntax Analysis
 int			lexical_analysis(char *token);
 t_bool		syntax_analysis(t_parser *parser);
+int			is_assign_word(char *token);
 t_bool		syntax_pipe(t_token *token, int pos);
 t_bool		syntax_redirect_io(t_token *token);
 t_bool		syntax_quote(t_token *token);

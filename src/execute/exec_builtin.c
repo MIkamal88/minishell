@@ -25,6 +25,9 @@ void	exec_builtin_parent(t_mini *minishell)
 		g_exit_code = ft_unset(minishell, ptr->exec);
 	else if (!ft_strncmp(ptr->exec_path, "exit\0", 5))
 		g_exit_code = ft_exit(ptr->exec, minishell);
+	else if (is_assign_word(ptr->exec_path))
+		assign_word(minishell);
+	envp_swap(minishell, ptr);
 }
 
 void	exec_builtin_child(t_mini *minishell)
@@ -42,7 +45,7 @@ void	exec_builtin_child(t_mini *minishell)
 		g_exit_code = ft_pwd();
 }
 
-int	is_forked(t_mini *minishell)
+t_bool	is_forked(t_mini *minishell)
 {
 	t_cmd	*ptr;
 
@@ -53,14 +56,14 @@ int	is_forked(t_mini *minishell)
 	{
 		if (!ptr->is_piped)
 			exec_builtin_parent(minishell);
-		return (0);
+		return (FALSE);
 	}
 	else if (!ft_strncmp(ptr->exec_path, "export\0", 7)
 		&& ptr->exec[1] && *ptr->exec[1])
 	{
 		if (!ptr->is_piped)
 			exec_builtin_parent(minishell);
-		return (0);
+		return (FALSE);
 	}
-	return (1);
+	return (TRUE);
 }

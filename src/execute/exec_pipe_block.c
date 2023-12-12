@@ -55,6 +55,30 @@ static void	wait_all(int pid[MAX_PID], int id)
 		g_exit_code = WEXITSTATUS(wstatus);
 }
 
+void	exec_cmd(t_mini *minishell)
+{
+	t_cmd	*cmd;
+	pid_t	pid[MAX_PID];
+	int		id;
+
+	id = -1;
+	cmd = minishell->cmd;
+	ft_memset(pid, 0, MAX_PID);
+	cmd->exec_path = fetch_path(cmd, minishell->env);
+	if (cmd->fd_in == -1 || cmd->fd_out == -1)
+		exit_errno(cmd->errfile, cmd->errnb);
+	else if (cmd->exec_path)
+	{
+		pid[++id] = fork();
+		if (pid[id] == -1)
+			ft_error(NULL, 0, 11);
+		if (pid[id] == 0)
+			exec_child(minishell);
+	}
+	close_fd(cmd, BOTH);
+	wait_all(pid, id);
+}
+
 void	exec_pipe_block(t_mini *minishell)
 {
 	t_cmd	**ptr;
