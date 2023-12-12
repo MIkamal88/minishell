@@ -1,5 +1,5 @@
 ls |  --> FIXED
-ls | echo asd
+ls | echo asd --> FIXED
 /bin/ls as a command does not work --> FIXED
 $? + $? returns wrong exit code
 ctrl + D in an empty prompt should quit minishell ->> Relaunch! --> FIXED

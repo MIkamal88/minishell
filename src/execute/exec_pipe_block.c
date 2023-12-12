@@ -21,7 +21,7 @@ static void	dup2_close_fds(t_cmd *cmd)
 	close_fds(cmd);
 }
 
-static void	exec_child(t_mini *minishell)
+static void	exec_child(t_mini *minishell, t_cmd *tmp)
 {
 	t_cmd	*ptr;
 
@@ -35,7 +35,14 @@ static void	exec_child(t_mini *minishell)
 		execve(ptr->exec_path, ptr->exec, ptr->envp);
 		exit_errno(ptr->exec[0], errno);
 	}
-	clear(minishell);
+	if (minishell->env)
+		clear_env(minishell);
+	if (minishell->parser)
+		clear_parser(minishell);
+	if (tmp)
+		clear_cmd(&tmp);
+	rl_clear_history();
+	free(minishell);
 	ft_error("", EXIT, g_exit_code);
 }
 
@@ -73,7 +80,7 @@ void	exec_cmd(t_mini *minishell)
 		if (pid[id] == -1)
 			ft_error(NULL, 0, 11);
 		if (pid[id] == 0)
-			exec_child(minishell);
+			exec_child(minishell, NULL);
 	}
 	close_fd(cmd, BOTH);
 	wait_all(pid, id);
@@ -82,11 +89,13 @@ void	exec_cmd(t_mini *minishell)
 void	exec_pipe_block(t_mini *minishell)
 {
 	t_cmd	**ptr;
+	t_cmd	*tmp;
 	pid_t	pid[MAX_PID];
 	int		id;
 
 	id = -1;
 	ptr = &minishell->cmd;
+	tmp = minishell->cmd;
 	while (*ptr)
 	{
 		exec_cmd_parent_sig();
@@ -100,7 +109,7 @@ void	exec_pipe_block(t_mini *minishell)
 			if (pid[id] == -1)
 				ft_error(NULL, EXIT, 11);
 			if (pid[id] == 0)
-				exec_child(minishell);
+				exec_child(minishell, tmp);
 		}
 		close_fd(*ptr, BOTH);
 		*ptr = (*ptr)->next;

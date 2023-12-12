@@ -92,6 +92,7 @@ static int	check_fds(t_cmd *cmd)
  *	RETURN VALUES
  *	-
  */
+
 int	define_redirects(t_mini *minishell)
 {
 	t_cmd		*cmd;
@@ -106,6 +107,7 @@ int	define_redirects(t_mini *minishell)
 			if (cmd->fd_out == -1 || cmd->fd_in == -1)
 				break ;
 			get_fileno(redirects->lexema, redirects->next->tkn, cmd);
+			redirects = redirects->next;
 			redirects = redirects->next;
 		}
 		if (!check_fds(cmd))
