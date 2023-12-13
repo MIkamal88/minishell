@@ -39,6 +39,8 @@ SRC	= main.c\
 			fetch_path.c\
 			exec_builtin.c\
 			pipes_redirects.c\
+			heredoc.c\
+			heredoc_sigs.c\
 			close_fds.c\
 			cmd_sigs.c\
 			ft_pwd.c\

@@ -125,6 +125,11 @@ char		*fetch_path(t_cmd *cmd, t_env *env);
 void		exec_cmd_child_sig(void);
 void		exec_cmd_parent_sig(void);
 
+// Heredoc
+void		get_heredoc_child_signal(void);
+void		get_heredoc_parent_signal(void);
+int			init_heredoc(char *filename, t_mini *minishell);
+
 // Builtins
 int			ft_env(t_mini *minishell, char **exec);
 int			ft_export(t_mini *minishell, char **exec);

@@ -39,13 +39,11 @@ void	change_exec(t_cmd *cmd, int pos)
 
 void	assign_word(t_mini *minishell)
 {
-	t_cmd	*ptr;
 	t_token	*tmp;
 	int		pos;
 	int		i;
 
-	ptr = minishell->cmd;
-	tmp = ptr->commands;
+	tmp = minishell->cmd->commands;
 	i = 0;
 	pos = 0;
 	while (tmp)
@@ -59,10 +57,10 @@ void	assign_word(t_mini *minishell)
 		i++;
 	}
 	if (!pos)
-		exec_export(minishell, (*ptr->exec));
+		exec_export(minishell, (*minishell->cmd->exec));
 	else
 	{
-		change_exec(ptr, pos);
+		change_exec(minishell->cmd, pos);
 		exec_cmd(minishell);
 	}
 }

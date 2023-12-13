@@ -44,29 +44,29 @@ void	setup_pipes(t_mini *minishell)
 	}
 }
 
-static void	get_fileno(int operator, char *filename, t_cmd *cmd)
+static void	get_fileno(t_mini *minishell, int op, char *file, t_cmd *cmd)
 {
-	if (operator == DGREAT || operator == GREAT)
+	if (op == DGREAT || op == GREAT)
 	{
 		if (cmd->fd_out != -2)
 			close(cmd->fd_out);
 	}
-	else if (operator == DLESS || operator == LESS)
+	else if (op == DLESS || op == LESS)
 	{
 		if (cmd->fd_in != -2)
 			close(cmd->fd_in);
 	}
-	if (operator == DGREAT)
-		cmd->fd_out = open(filename, O_RDWR | O_APPEND | O_CREAT, 0777);
-	else if (operator == GREAT)
-		cmd->fd_out = open(filename, O_RDWR | O_TRUNC | O_CREAT, 0777);
-	else if (operator == LESS)
-		cmd->fd_in = open(filename, O_RDONLY);
-	// else if (operator == DLESS)
-	// 	cmd->fd_in = init_heredoc(filename);
+	if (op == DGREAT)
+		cmd->fd_out = open(file, O_RDWR | O_APPEND | O_CREAT, 0777);
+	else if (op == GREAT)
+		cmd->fd_out = open(file, O_RDWR | O_TRUNC | O_CREAT, 0777);
+	else if (op == LESS)
+		cmd->fd_in = open(file, O_RDONLY);
+	else if (op == DLESS)
+		cmd->fd_in = init_heredoc(file, minishell);
 	cmd->errnb = errno;
 	if (errno != 0)
-		cmd->errfile = filename;
+		cmd->errfile = file;
 }
 
 static int	check_fds(t_cmd *cmd)
@@ -106,7 +106,7 @@ int	define_redirects(t_mini *minishell)
 		{
 			if (cmd->fd_out == -1 || cmd->fd_in == -1)
 				break ;
-			get_fileno(redirects->lexema, redirects->next->tkn, cmd);
+			get_fileno(minishell, redirects->lexema, redirects->next->tkn, cmd);
 			redirects = redirects->next;
 			redirects = redirects->next;
 		}

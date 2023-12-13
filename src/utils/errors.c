@@ -56,8 +56,8 @@ static void	redirect_err(char *str, int err)
 	}
 	if (err == 33)
 	{
-		write_err("Minishell: warning: here-document delimited by \
-			end-of-file (wanted `");
+		write_err("Minishell: warning: here-document delimited by");
+		write_err(" end-of-file (wanted `");
 		write_err(str);
 		write_err("')\n");
 	}
