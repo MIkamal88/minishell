@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: m_kamal <m_kamal@student.42.fr>            +#+  +:+       +#+        */
+/*   By: anayef <anayef@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 20:02:59 by m_kamal           #+#    #+#             */
-/*   Updated: 2023/12/04 20:02:59 by m_kamal          ###   ########.fr       */
+/*   Updated: 2023/12/13 19:15:34 by anayef           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,13 @@ void	exec_export(t_mini *minishell, char *exec)
 	{
 		if (value)
 		{
-			if (ptr->value)
-				free(ptr->value);
+			free(ptr->value);
 			ptr->value = value;
 		}
 		free(name);
 	}
 	else
-		add_env(minishell, name, get_env_value(exec));
-	free(value);
+		add_env(minishell, name, value);
 }
 
 int	ft_export(t_mini *minishell, char **exec)

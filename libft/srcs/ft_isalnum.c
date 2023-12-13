@@ -14,7 +14,7 @@
 
 int	ft_isalnum(int i)
 {
-	if ((ft_isalpha(i) != 0) || (ft_isdigit(i) != 0))
+	if ((ft_isalpha(i) != 0) || (ft_isdigit(i) != 0) || (i == '_'))
 		return (1);
 	else
 		return (0);
