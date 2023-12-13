@@ -26,7 +26,7 @@ int	ft_env(t_mini *minishell, char **exec)
 
 	ptr = minishell->env;
 	if (*(exec + 1))
-		ft_error("env", 14, 127);
+		ft_error("env", CMD_ARGS, 127);
 	else
 	{
 		while (ptr)

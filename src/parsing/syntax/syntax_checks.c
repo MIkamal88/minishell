@@ -18,7 +18,7 @@ t_bool	syntax_pipe(t_token *token, int pos)
 	{
 		if (pos == 0 || !token->next)
 		{
-			ft_error(token->tkn, 21, 2);
+			ft_error(token->tkn, SYNT_ERR_TOKEN, 2);
 			return (FALSE);
 		}
 	}
@@ -32,13 +32,13 @@ t_bool	syntax_redirect_io(t_token *token)
 	{
 		if (!token->next)
 		{
-			ft_error(NULL, 21, 2);
+			ft_error(token->tkn, SYNT_ERR_TOKEN, 2);
 			return (FALSE);
 		}
 		else if (token->next->lexema != WORD && \
 			token->next->lexema != ASSIGN_WORD)
 		{
-			ft_error(token->next->tkn, 21, 2);
+			ft_error(token->next->tkn, SYNT_ERR_TOKEN, 2);
 			return (FALSE);
 		}
 	}

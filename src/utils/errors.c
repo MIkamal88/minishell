@@ -62,7 +62,7 @@ static void	redirect_err(char *str, int err)
 		write_err("')\n");
 	}
 	if (err == 34)
-		write_err("Quit\n");
+		write_err("Quit (core dumped)\n");
 	if (err == 35)
 		write_err("\n");
 }

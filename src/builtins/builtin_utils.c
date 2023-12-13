@@ -26,7 +26,7 @@ void	change_exec(t_cmd *cmd, int pos)
 	size = tkn_len(tkn) + 1;
 	list = ft_calloc(sizeof(char *), size);
 	if (!list)
-		ft_error(NULL, 0, 11);
+		ft_error(NULL, EXIT, 11);
 	i = -1;
 	while (tkn)
 	{

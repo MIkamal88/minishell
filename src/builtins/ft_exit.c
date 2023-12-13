@@ -44,7 +44,7 @@ int	ft_exit(char **exec, t_mini *minishell)
 	ret = 0;
 	if (exec[1] && exec[2])
 	{
-		ft_error("exit", 14, 1);
+		ft_error("exit", CMD_ARGS, 1);
 		return (1);
 	}
 	if (exec[1] && is_numeric(exec[1]))

@@ -53,7 +53,7 @@ void	exec_cmd(t_mini *minishell)
 	{
 		pid[++id] = fork();
 		if (pid[id] == -1)
-			ft_error(NULL, 0, 11);
+			ft_error(NULL, EXIT, 11);
 		if (pid[id] == 0)
 			exec_child(minishell, NULL);
 	}

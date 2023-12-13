@@ -67,9 +67,9 @@ int	ft_export(t_mini *minishell, char **exec)
 	while (*exec)
 	{
 		if (check_params(*exec))
-			ft_error(*exec, 17, 1);
+			ft_error(*exec, NO_OPTN, 1);
 		else if (!is_valid_key(*exec))
-			ft_error(*exec, 16, 1);
+			ft_error(*exec, EXPORT, 1);
 		else
 			exec_export(minishell, *exec);
 		exec++;

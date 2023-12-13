@@ -40,7 +40,7 @@ int	ft_unset(t_mini *minishell, char **exec)
 	while (*exec)
 	{
 		if (check_params(*exec))
-			ft_error(*exec, 14, 1);
+			ft_error(*exec, CMD_ARGS, 1);
 		else
 		{
 			target = get_env(minishell, *exec);

@@ -1,8 +1,13 @@
 ls |  --> FIXED
 ls | echo asd --> FIXED
 /bin/ls as a command does not work --> FIXED
-$? + $? returns wrong exit code
+$? + $? returns wrong exit code --> FIXED
 ctrl + D in an empty prompt should quit minishell ->> Relaunch! --> FIXED
-ctrl + \ after running a blocking command like 'cat'
+ctrl + \ after running a blocking command like 'cat' --> FIXED
 echo $myname$asd (asd is non existant) --> FIXED
 check builtins for parameters --> FIXED
+
+CD double frees
+pwd double frees
+Overwriting an ENV variable with export double leaks
+Just entering a redirection symbol in a buffer seg faults after running ft_error --> FIXED

@@ -15,7 +15,7 @@
 static void	child_sig(int signal)
 {
 	(void)signal;
-	ft_error(NULL, 3, 130);
+	ft_error(NULL, EXIT_HEREDOC_SIG, 130);
 }
 
 void	get_heredoc_child_signal(void)

@@ -46,7 +46,7 @@ static int	cd_cmd(t_mini *minishell, char *path)
 
 	if (chdir(path) == -1)
 	{
-		ft_error(path, 12, 1);
+		ft_error(path, CD_NO_F_OR_D, 1);
 		return (1);
 	}
 	oldpwd = ft_strjoin("OLDPWD=", key_search(minishell->env, "PWD"));
@@ -67,7 +67,7 @@ static int	cd_variable(t_mini *minishell, char *variable)
 	path = key_search(minishell->env, variable);
 	ret = 1;
 	if (!path || !*path)
-		ft_error(variable, 11, 1);
+		ft_error(variable, CD_NOT_SET, 1);
 	else
 	{
 		if (!ft_strncmp("OLDPWD", variable, 6))
@@ -85,7 +85,7 @@ int	ft_cd(t_mini *minishell, char **exec)
 	parameter = exec[1];
 	ret = 1;
 	if (parameter && exec[2])
-		ft_error("cd", 14, 1);
+		ft_error("cd", CMD_ARGS, 1);
 	else if (!parameter || !*parameter)
 		ret = cd_variable(minishell, "HOME");
 	else if (!ft_strncmp(parameter, "-", 2))
