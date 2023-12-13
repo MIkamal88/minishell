@@ -17,6 +17,8 @@ void	write_err(char *str)
 	int	i;
 
 	i = -1;
+	if (!str)
+		return ;
 	while (str[++i])
 		write(2, &str[i], 1);
 }
