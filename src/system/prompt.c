@@ -20,7 +20,7 @@ char	*create_prompt(void)
 	char	*second_half;
 	char	*result;
 
-	prog_name = ft_strjoin(ESC_GREEN, "BetterThanBash\001\033[0m\002:");
+	prog_name = ft_strjoin(ESC_GREEN, "xXBashXx\001\033[0m\002:");
 	folder = get_pwd();
 	folder_u = ft_strjoin(ESC_BLUE, folder);
 	second_half = ft_strjoin(folder_u, "\001\033[0m\002\n$ ");

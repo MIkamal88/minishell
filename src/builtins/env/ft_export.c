@@ -56,10 +56,13 @@ void	exec_export(t_mini *minishell, char *exec)
 
 int	ft_export(t_mini *minishell, char **exec)
 {
+	int	ret;
+
+	ret = 0;
 	if (!exec[1] || !*exec[1])
 	{
 		env_quotes(minishell);
-		return (0);
+		return (ret);
 	}
 	exec++;
 	while (*exec)
@@ -72,5 +75,6 @@ int	ft_export(t_mini *minishell, char **exec)
 			exec_export(minishell, *exec);
 		exec++;
 	}
-	return (0);
+	ret = g_exit_code;
+	return (ret);
 }

@@ -37,6 +37,7 @@ enum	e_mini_err
 	EXIT_HEREDOC_SIG = 3,
 	CD_NOT_SET = 11,
 	CD_NO_F_OR_D = 12,
+	IS_DIR = 13,
 	CMD_ARGS = 14,
 	CMD_MIA = 15,
 	EXPORT = 16,

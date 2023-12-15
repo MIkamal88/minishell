@@ -26,9 +26,11 @@ void	write_err(char *str)
 void	exit_errno(char *errfile, int errnb)
 {
 	if (errnb == EACCES)
-		ft_error(errfile, PERM_DENIED, 1);
+		ft_error(errfile, PERM_DENIED, 126);
 	else if (errnb == ENOENT)
 		ft_error(errfile, F_D_MIA, 1);
+	else if (errnb == EISDIR)
+		ft_error(errfile, IS_DIR, 126);
 	else
 		ft_error(errfile, CMD_MIA, 127);
 }
