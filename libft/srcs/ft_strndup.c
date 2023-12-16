@@ -16,7 +16,7 @@ char	*ft_strndup(const char *s1, size_t size)
 {
 	char	*ptr;
 
-	if (!size)
+	if (!size || !s1)
 		return (NULL);
 	ptr = malloc((size + 1) * sizeof(char));
 	if (ptr == NULL)
