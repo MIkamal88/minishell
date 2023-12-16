@@ -34,7 +34,7 @@ static void	exec_child(t_mini *minishell, t_cmd *tmp)
 		clear_cmd(&tmp);
 	rl_clear_history();
 	free(minishell);
-	ft_error("", EXIT, g_exit_code);
+	ft_error(NULL, EXIT, g_exit_code);
 }
 
 void	exec_cmd(t_mini *minishell)

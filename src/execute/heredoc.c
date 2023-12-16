@@ -35,7 +35,7 @@ static void	write_to_pipe(char *limiter, int *fd, t_mini *minishell)
 	close(*fd);
 	free(limiter);
 	clear(minishell);
-	ft_error("", EXIT, 0);
+	ft_error(NULL, EXIT, 0);
 }
 
 static int	interrupt_heredoc(int *fd)
@@ -47,7 +47,7 @@ static int	interrupt_heredoc(int *fd)
 static int	exit_heredoc(t_mini *minishell)
 {
 	clear(minishell);
-	ft_error("", EXIT, 35);
+	ft_error(NULL, EXIT, 35);
 	return (-3);
 }
 
