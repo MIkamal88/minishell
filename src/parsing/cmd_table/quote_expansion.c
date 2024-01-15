@@ -68,8 +68,12 @@ static void	var_quote_expand(t_env *env, t_token *token, int start, int *size)
 	prev = ft_strndup(token->tkn, pos++);
 	expansion = expand_variable(env, token, &pos);
 	next = ft_strdup(&token->tkn[pos]);
-	swap_token(token, ft_strnjoin(3, prev, expansion, next));
-	*size = (*size) + ft_strlen(expansion) - 2;
+	if (expansion)
+		swap_token(token, ft_strnjoin(3, prev, expansion, next));
+	else
+		swap_token(token, ft_strnjoin(3, NULL, expansion, next));
+	if (*size > 0)
+		*size = (*size) + ft_strlen(expansion) - 2;
 	if (expansion)
 		free(expansion);
 	free(prev);

@@ -104,7 +104,7 @@ leak:	all
 
 .PHONY:		all clean fclean re
 
-.SILENT:	$(NAME)	$(OBJ)
+# .SILENT:	$(NAME)	$(OBJ)
 
 # Colors
 GR	= \033[32;1m
